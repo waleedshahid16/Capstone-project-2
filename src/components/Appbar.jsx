@@ -11,9 +11,11 @@ import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
 import Link from "@mui/material/Link";
 import { useState } from "react";
-import { Badge } from "@mui/material";
+import { Badge, Divider } from "@mui/material";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import PhoneIcon from "@mui/icons-material/Phone";
+import LoginIcon from "@mui/icons-material/Login";
+import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import { Link as RouterLink } from "react-router-dom";
 import Cart from "./Cart";
 import { useSelector } from "react-redux";
@@ -45,34 +47,50 @@ function ResponsiveAppBar() {
     <>
       <AppBar position="static" sx={{ backgroundColor: "rgba(0, 0, 0, 0.8)" }}>
         <Container maxWidth="xl">
-          <Toolbar disableGutters>
+          <Toolbar
+            disableGutters
+            sx={{
+              minHeight: { xs: 56, sm: 60, md: 64, lg: 70 },
+              px: { xs: 0.5, sm: 1, md: 1.5 },
+            }}
+          >
+            {/* Desktop Logo */}
             <Link
               component={RouterLink}
               to="/"
               underline="none"
               sx={{
-                mr: 2,
+                mr: { md: 2, lg: 3 },
                 display: { xs: "none", md: "flex" },
                 fontFamily: "monospace",
                 fontWeight: 700,
-                letterSpacing: ".3rem",
+                letterSpacing: { md: ".2rem", lg: ".3rem" },
                 color: "white",
-                fontSize: "1.25rem",
+                fontSize: { md: "1.15rem", lg: "1.25rem" },
+                transition: "opacity 0.3s ease",
+                "&:hover": {
+                  opacity: 0.8,
+                },
               }}
             >
               Digitronix
             </Link>
 
-            <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+            {/* Mobile Menu Icon */}
+            <Box sx={{ flexGrow: 0, display: { xs: "flex", md: "none" } }}>
               <IconButton
                 size="large"
-                aria-label="account of current user"
+                aria-label="menu"
                 aria-controls="menu-appbar"
                 aria-haspopup="true"
                 onClick={handleOpenNavMenu}
                 color="inherit"
+                sx={{
+                  p: { xs: 0.75, sm: 1 },
+                  mr: { xs: 0.5, sm: 1 },
+                }}
               >
-                <MenuIcon />
+                <MenuIcon sx={{ fontSize: { xs: 24, sm: 28 } }} />
               </IconButton>
               <Menu
                 id="menu-appbar"
@@ -88,7 +106,12 @@ function ResponsiveAppBar() {
                 }}
                 open={Boolean(anchorElNav)}
                 onClose={handleCloseNavMenu}
-                sx={{ display: { xs: "block", md: "none" } }}
+                sx={{
+                  display: { xs: "block", md: "none" },
+                  "& .MuiPaper-root": {
+                    minWidth: { xs: 180, sm: 200 },
+                  },
+                }}
               >
                 {pages.map((page) => (
                   <MenuItem
@@ -96,8 +119,17 @@ function ResponsiveAppBar() {
                     onClick={handleCloseNavMenu}
                     component={RouterLink}
                     to={page.path}
+                    sx={{
+                      py: { xs: 1, sm: 1.25 },
+                      px: { xs: 2, sm: 2.5 },
+                    }}
                   >
-                    <Typography sx={{ textAlign: "center" }}>
+                    <Typography
+                      sx={{
+                        textAlign: "center",
+                        fontSize: { xs: "0.9rem", sm: "0.95rem" },
+                      }}
+                    >
                       {page.name}
                     </Typography>
                   </MenuItem>
@@ -106,8 +138,59 @@ function ResponsiveAppBar() {
                   onClick={handleCloseNavMenu}
                   component={RouterLink}
                   to="/contact"
+                  sx={{
+                    py: { xs: 1, sm: 1.25 },
+                    px: { xs: 2, sm: 2.5 },
+                  }}
                 >
-                  <Typography sx={{ textAlign: "center" }}>Contact Us</Typography>
+                  <Typography
+                    sx={{
+                      textAlign: "center",
+                      fontSize: { xs: "0.9rem", sm: "0.95rem" },
+                    }}
+                  >
+                    Contact Us
+                  </Typography>
+                </MenuItem>
+
+                <Divider sx={{ my: 1 }} />
+
+                <MenuItem
+                  onClick={handleCloseNavMenu}
+                  component={RouterLink}
+                  to="/login"
+                  sx={{
+                    py: { xs: 1, sm: 1.25 },
+                    px: { xs: 2, sm: 2.5 },
+                  }}
+                >
+                  <LoginIcon sx={{ mr: 1, fontSize: { xs: 18, sm: 20 } }} />
+                  <Typography
+                    sx={{
+                      fontSize: { xs: "0.9rem", sm: "0.95rem" },
+                    }}
+                  >
+                    Login
+                  </Typography>
+                </MenuItem>
+
+                <MenuItem
+                  onClick={handleCloseNavMenu}
+                  component={RouterLink}
+                  to="/signup"
+                  sx={{
+                    py: { xs: 1, sm: 1.25 },
+                    px: { xs: 2, sm: 2.5 },
+                  }}
+                >
+                  <PersonAddIcon sx={{ mr: 1, fontSize: { xs: 18, sm: 20 } }} />
+                  <Typography
+                    sx={{
+                      fontSize: { xs: "0.9rem", sm: "0.95rem" },
+                    }}
+                  >
+                    Signup
+                  </Typography>
                 </MenuItem>
               </Menu>
             </Box>
@@ -117,20 +200,30 @@ function ResponsiveAppBar() {
               to="/"
               underline="none"
               sx={{
-                mr: 2,
                 display: { xs: "flex", md: "none" },
                 flexGrow: 1,
                 fontFamily: "monospace",
                 fontWeight: 700,
-                letterSpacing: ".3rem",
+                letterSpacing: { xs: ".15rem", sm: ".2rem" },
                 color: "white",
-                fontSize: "1.25rem",
+                fontSize: { xs: "1rem", sm: "1.1rem" },
+                transition: "opacity 0.3s ease",
+                "&:hover": {
+                  opacity: 0.8,
+                },
               }}
             >
               Digitronix
             </Link>
 
-            <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
+            <Box
+              sx={{
+                flexGrow: 1,
+                display: { xs: "none", md: "flex" },
+                gap: { md: 1, lg: 2 },
+                ml: { md: 2, lg: 3 },
+              }}
+            >
               {pages.map((page) => (
                 <Button
                   key={page.name}
@@ -142,6 +235,12 @@ function ResponsiveAppBar() {
                     color: "white",
                     display: "block",
                     textDecoration: "none",
+                    fontSize: { md: "0.875rem", lg: "1rem" },
+                    px: { md: 1.5, lg: 2 },
+                    transition: "all 0.3s ease",
+                    "&:hover": {
+                      backgroundColor: "rgba(255, 255, 255, 0.1)",
+                    },
                   }}
                 >
                   {page.name}
@@ -149,36 +248,49 @@ function ResponsiveAppBar() {
               ))}
             </Box>
 
-            <Box className="grow-0">
+            <Box
+              sx={{
+                display: { xs: "none", md: "flex" },
+                gap: { md: 1, lg: 1.5 },
+              }}
+            >
               <Button
                 component={RouterLink}
                 to="/login"
                 sx={{
                   color: "white",
-                  borderColor: "black",
-                  backgroundColor: "rgba(0,0,0,0.1)",
+                  borderColor: "white",
+                  backgroundColor: "rgba(255, 255, 255, 0.1)",
+                  fontSize: { md: "0.8rem", lg: "0.875rem" },
+                  px: { md: 1.75, lg: 2 },
+                  py: { md: 0.5, lg: 0.75 },
+                  transition: "all 0.3s ease",
                   "&:hover": {
                     backgroundColor: "white",
                     color: "black",
+                    borderColor: "white",
                   },
                 }}
                 variant="outlined"
               >
                 Login
               </Button>
-            </Box>
 
-            <Box className="grow-0 ms-2">
               <Button
                 component={RouterLink}
                 to="/signup"
                 sx={{
                   color: "white",
-                  borderColor: "black",
-                  backgroundColor: "rgba(0,0,0,0.1)",
+                  borderColor: "white",
+                  backgroundColor: "rgba(255, 255, 255, 0.1)",
+                  fontSize: { md: "0.8rem", lg: "0.875rem" },
+                  px: { md: 1.75, lg: 2 },
+                  py: { md: 0.5, lg: 0.75 },
+                  transition: "all 0.3s ease",
                   "&:hover": {
                     backgroundColor: "white",
                     color: "black",
+                    borderColor: "white",
                   },
                 }}
                 variant="outlined"
@@ -187,23 +299,60 @@ function ResponsiveAppBar() {
               </Button>
             </Box>
 
-            <Box className="grow-0 ms-2">
+            <Box
+              sx={{
+                display: { xs: "none", md: "block" },
+                ml: { md: 1, lg: 1.5 },
+              }}
+            >
               <IconButton
                 component={RouterLink}
                 to="/contact"
-                sx={{ color: "white" }}
+                sx={{
+                  color: "white",
+                  p: { md: 1, lg: 1.25 },
+                  transition: "all 0.3s ease",
+                  "&:hover": {
+                    backgroundColor: "rgba(255, 255, 255, 0.1)",
+                  },
+                }}
                 aria-label="Contact Us"
               >
-                <PhoneIcon />
+                <PhoneIcon sx={{ fontSize: { md: 22, lg: 24 } }} />
               </IconButton>
             </Box>
 
-            <Box className="grow-0 ms-2">
-              <Button onClick={toggleCart}>
-                <Badge badgeContent={cartList?.length} color="error">
-                  <AddShoppingCartIcon sx={{ color: "white" }} />
+            <Box sx={{ ml: { xs: 0.5, sm: 1, md: 1.5 } }}>
+              <IconButton
+                onClick={toggleCart}
+                sx={{
+                  p: { xs: 0.75, sm: 1, md: 1.25 },
+                  transition: "all 0.3s ease",
+                  "&:hover": {
+                    backgroundColor: "rgba(255, 255, 255, 0.1)",
+                  },
+                }}
+                aria-label="Shopping Cart"
+              >
+                <Badge
+                  badgeContent={cartList?.length}
+                  color="error"
+                  sx={{
+                    "& .MuiBadge-badge": {
+                      fontSize: { xs: "0.65rem", sm: "0.7rem", md: "0.75rem" },
+                      minWidth: { xs: 16, sm: 18, md: 20 },
+                      height: { xs: 16, sm: 18, md: 20 },
+                    },
+                  }}
+                >
+                  <AddShoppingCartIcon
+                    sx={{
+                      color: "white",
+                      fontSize: { xs: 20, sm: 22, md: 24, lg: 26 },
+                    }}
+                  />
                 </Badge>
-              </Button>
+              </IconButton>
             </Box>
           </Toolbar>
         </Container>
