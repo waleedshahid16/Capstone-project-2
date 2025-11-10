@@ -1,27 +1,36 @@
 import React from "react";
 import { Box, Container, Typography, Card } from "@mui/material";
-import { LocalShipping, AccessTime, LocationOn, CheckCircle } from "@mui/icons-material";
+import {
+  LocalShipping,
+  AccessTime,
+  LocationOn,
+  CheckCircle,
+} from "@mui/icons-material";
 
 const ShippingPolicy = () => {
   return (
     <Box
       sx={{
         minHeight: "80vh",
-        py: { xs: 4, md: 6 },
+        py: { xs: 3, sm: 4, md: 6 },
         backgroundColor: "rgba(0,0,0,0.02)",
       }}
     >
       <Container maxWidth="lg">
-        <Box sx={{ textAlign: "center", mb: 6 }}>
+        <Box sx={{ textAlign: "center", mb: { xs: 4, sm: 5, md: 6 } }}>
           <LocalShipping
-            sx={{ fontSize: 64, color: "rgba(0,0,0,0.8)", mb: 2 }}
+            sx={{
+              fontSize: { xs: 48, sm: 56, md: 64 },
+              color: "rgba(0,0,0,0.8)",
+              mb: { xs: 1.5, sm: 2 },
+            }}
           />
           <Typography
             variant="h2"
             sx={{
               fontWeight: 700,
-              mb: 2,
-              fontSize: { xs: "2rem", md: "3rem" },
+              mb: { xs: 1.5, sm: 2 },
+              fontSize: { xs: "1.75rem", sm: "2.5rem", md: "3rem" },
               color: "rgba(0,0,0,0.9)",
             }}
           >
@@ -34,45 +43,48 @@ const ShippingPolicy = () => {
               maxWidth: "800px",
               mx: "auto",
               lineHeight: 1.8,
+              px: { xs: 2, sm: 0 },
+              fontSize: { xs: "1rem", sm: "1.15rem", md: "1.25rem" },
             }}
           >
-            We are committed to delivering your orders safely and on time.
-            Learn more about our shipping process, delivery times, and
-            policies.
+            We are committed to delivering your orders safely and on time. Learn
+            more about our shipping process, delivery times, and policies.
           </Typography>
         </Box>
 
         <Card
           sx={{
-            p: { xs: 3, md: 5 },
+            p: { xs: 2, sm: 3, md: 5 },
             backgroundColor: "rgba(0,0,0,0.3)",
-            borderRadius: 3,
+            borderRadius: { xs: 2, md: 3 },
             boxShadow: 2,
-            mb: 4,
+            mb: { xs: 3, sm: 4 },
           }}
         >
           <Typography
             variant="h4"
             sx={{
               fontWeight: 700,
-              mb: 3,
+              mb: { xs: 2, sm: 3 },
               color: "rgba(0,0,0,0.9)",
               display: "flex",
               alignItems: "center",
-              gap: 2,
+              gap: { xs: 1.5, sm: 2 },
+              flexWrap: "wrap",
+              fontSize: { xs: "1.25rem", sm: "1.75rem", md: "2rem" },
             }}
           >
-            <AccessTime sx={{ fontSize: 32 }} />
+            <AccessTime sx={{ fontSize: { xs: 24, sm: 28, md: 32 } }} />
             Delivery Times
           </Typography>
-          <Box sx={{ pl: { xs: 0, md: 6 }, mb: 4 }}>
+          <Box sx={{ pl: { xs: 0, sm: 2, md: 6 }, mb: { xs: 3, sm: 4 } }}>
             <Typography
               variant="body1"
               sx={{
                 color: "rgba(0,0,0,0.7)",
                 lineHeight: 1.8,
-                mb: 2,
-                fontSize: "1.1rem",
+                mb: { xs: 1.5, sm: 2 },
+                fontSize: { xs: "0.95rem", sm: "1rem", md: "1.1rem" },
               }}
             >
               <strong>Standard Shipping:</strong> 5-7 business days
@@ -82,8 +94,8 @@ const ShippingPolicy = () => {
               sx={{
                 color: "rgba(0,0,0,0.7)",
                 lineHeight: 1.8,
-                mb: 2,
-                fontSize: "1.1rem",
+                mb: { xs: 1.5, sm: 2 },
+                fontSize: { xs: "0.95rem", sm: "1rem", md: "1.1rem" },
               }}
             >
               <strong>Express Shipping:</strong> 2-3 business days
@@ -93,7 +105,7 @@ const ShippingPolicy = () => {
               sx={{
                 color: "rgba(0,0,0,0.7)",
                 lineHeight: 1.8,
-                fontSize: "1.1rem",
+                fontSize: { xs: "0.95rem", sm: "1rem", md: "1.1rem" },
               }}
             >
               <strong>Same Day Delivery:</strong> Available in select areas
@@ -105,24 +117,26 @@ const ShippingPolicy = () => {
             variant="h4"
             sx={{
               fontWeight: 700,
-              mb: 3,
+              mb: { xs: 2, sm: 3 },
               color: "rgba(0,0,0,0.9)",
               display: "flex",
               alignItems: "center",
-              gap: 2,
+              gap: { xs: 1.5, sm: 2 },
+              flexWrap: "wrap",
+              fontSize: { xs: "1.25rem", sm: "1.75rem", md: "2rem" },
             }}
           >
-            <LocationOn sx={{ fontSize: 32 }} />
+            <LocationOn sx={{ fontSize: { xs: 24, sm: 28, md: 32 } }} />
             Shipping Locations
           </Typography>
-          <Box sx={{ pl: { xs: 0, md: 6 }, mb: 4 }}>
+          <Box sx={{ pl: { xs: 0, sm: 2, md: 6 }, mb: { xs: 3, sm: 4 } }}>
             <Typography
               variant="body1"
               sx={{
                 color: "rgba(0,0,0,0.7)",
                 lineHeight: 1.8,
-                mb: 2,
-                fontSize: "1.1rem",
+                mb: { xs: 1.5, sm: 2 },
+                fontSize: { xs: "0.95rem", sm: "1rem", md: "1.1rem" },
               }}
             >
               We currently ship to all major cities in Pakistan. Free shipping
@@ -134,7 +148,7 @@ const ShippingPolicy = () => {
               sx={{
                 color: "rgba(0,0,0,0.7)",
                 lineHeight: 1.8,
-                fontSize: "1.1rem",
+                fontSize: { xs: "0.95rem", sm: "1rem", md: "1.1rem" },
               }}
             >
               International shipping is available to select countries. Please
@@ -146,24 +160,26 @@ const ShippingPolicy = () => {
             variant="h4"
             sx={{
               fontWeight: 700,
-              mb: 3,
+              mb: { xs: 2, sm: 3 },
               color: "rgba(0,0,0,0.9)",
               display: "flex",
               alignItems: "center",
-              gap: 2,
+              gap: { xs: 1.5, sm: 2 },
+              flexWrap: "wrap",
+              fontSize: { xs: "1.25rem", sm: "1.75rem", md: "2rem" },
             }}
           >
-            <CheckCircle sx={{ fontSize: 32 }} />
+            <CheckCircle sx={{ fontSize: { xs: 24, sm: 28, md: 32 } }} />
             Order Processing
           </Typography>
-          <Box sx={{ pl: { xs: 0, md: 6 } }}>
+          <Box sx={{ pl: { xs: 0, sm: 2, md: 6 } }}>
             <Typography
               variant="body1"
               sx={{
                 color: "rgba(0,0,0,0.7)",
                 lineHeight: 1.8,
-                mb: 2,
-                fontSize: "1.1rem",
+                mb: { xs: 1.5, sm: 2 },
+                fontSize: { xs: "0.95rem", sm: "1rem", md: "1.1rem" },
               }}
             >
               <strong>Order Confirmation:</strong> You will receive an email
@@ -174,21 +190,21 @@ const ShippingPolicy = () => {
               sx={{
                 color: "rgba(0,0,0,0.7)",
                 lineHeight: 1.8,
-                mb: 2,
-                fontSize: "1.1rem",
+                mb: { xs: 1.5, sm: 2 },
+                fontSize: { xs: "0.95rem", sm: "1rem", md: "1.1rem" },
               }}
             >
               <strong>Processing Time:</strong> Orders are typically processed
-              within 1-2 business days. During peak seasons, processing may
-              take 3-5 business days.
+              within 1-2 business days. During peak seasons, processing may take
+              3-5 business days.
             </Typography>
             <Typography
               variant="body1"
               sx={{
                 color: "rgba(0,0,0,0.7)",
                 lineHeight: 1.8,
-                mb: 2,
-                fontSize: "1.1rem",
+                mb: { xs: 1.5, sm: 2 },
+                fontSize: { xs: "0.95rem", sm: "1rem", md: "1.1rem" },
               }}
             >
               <strong>Tracking:</strong> Once your order ships, you will receive
@@ -200,7 +216,7 @@ const ShippingPolicy = () => {
               sx={{
                 color: "rgba(0,0,0,0.7)",
                 lineHeight: 1.8,
-                fontSize: "1.1rem",
+                fontSize: { xs: "0.95rem", sm: "1rem", md: "1.1rem" },
               }}
             >
               <strong>Delivery:</strong> Our delivery partners will contact you
@@ -212,9 +228,9 @@ const ShippingPolicy = () => {
 
         <Card
           sx={{
-            p: { xs: 3, md: 4 },
+            p: { xs: 2, sm: 3, md: 4 },
             backgroundColor: "rgba(0,0,0,0.3)",
-            borderRadius: 3,
+            borderRadius: { xs: 2, md: 3 },
             boxShadow: 2,
           }}
         >
@@ -222,25 +238,56 @@ const ShippingPolicy = () => {
             variant="h5"
             sx={{
               fontWeight: 700,
-              mb: 2,
+              mb: { xs: 1.5, sm: 2 },
               color: "rgba(0,0,0,0.9)",
+              fontSize: { xs: "1.15rem", sm: "1.35rem", md: "1.5rem" },
             }}
           >
             Important Notes
           </Typography>
-          <Box component="ul" sx={{ pl: 3, color: "rgba(0,0,0,0.7)" }}>
-            <Typography component="li" sx={{ mb: 1, lineHeight: 1.8 }}>
+          <Box
+            component="ul"
+            sx={{ pl: { xs: 2, sm: 3 }, color: "rgba(0,0,0,0.7)" }}
+          >
+            <Typography
+              component="li"
+              sx={{
+                mb: { xs: 0.75, sm: 1 },
+                lineHeight: 1.8,
+                fontSize: { xs: "0.95rem", sm: "1rem" },
+              }}
+            >
               Delivery times are estimates and may vary due to factors beyond
               our control (weather, holidays, etc.)
             </Typography>
-            <Typography component="li" sx={{ mb: 1, lineHeight: 1.8 }}>
+            <Typography
+              component="li"
+              sx={{
+                mb: { xs: 0.75, sm: 1 },
+                lineHeight: 1.8,
+                fontSize: { xs: "0.95rem", sm: "1rem" },
+              }}
+            >
               Please verify your shipping address before completing your order.
               We are not responsible for delays due to incorrect addresses.
             </Typography>
-            <Typography component="li" sx={{ mb: 1, lineHeight: 1.8 }}>
+            <Typography
+              component="li"
+              sx={{
+                mb: { xs: 0.75, sm: 1 },
+                lineHeight: 1.8,
+                fontSize: { xs: "0.95rem", sm: "1rem" },
+              }}
+            >
               For large or heavy items, additional delivery charges may apply.
             </Typography>
-            <Typography component="li" sx={{ lineHeight: 1.8 }}>
+            <Typography
+              component="li"
+              sx={{
+                lineHeight: 1.8,
+                fontSize: { xs: "0.95rem", sm: "1rem" },
+              }}
+            >
               If you have any questions about shipping, please contact our
               customer service team.
             </Typography>
@@ -252,4 +299,3 @@ const ShippingPolicy = () => {
 };
 
 export default ShippingPolicy;
-

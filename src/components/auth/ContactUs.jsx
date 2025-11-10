@@ -53,7 +53,9 @@ const ContactUs = () => {
     console.log("Contact form data:", data);
     // Here you would typically send the data to your backend
     // For now, we'll just show a success message
-    setSnackbarMessage("Thank you for contacting us! We'll get back to you soon.");
+    setSnackbarMessage(
+      "Thank you for contacting us! We'll get back to you soon."
+    );
     setSnackbarSeverity("success");
     setOpenSnackbar(true);
     reset();
@@ -90,15 +92,16 @@ const ContactUs = () => {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          p: { xs: 2, sm: 3 },
+          p: { xs: 2, sm: 3, md: 4 },
+          py: { xs: 3, sm: 4, md: 5 },
         }}
       >
         <Card
           elevation={8}
           sx={{
-            maxWidth: 600,
+            maxWidth: { xs: "100%", sm: 550, md: 600 },
             width: "100%",
-            borderRadius: 3,
+            borderRadius: { xs: 2, sm: 3 },
             backgroundColor: "rgba(255,255,255,0.95)",
             backdropFilter: "blur(10px)",
           }}
@@ -107,8 +110,8 @@ const ContactUs = () => {
             sx={{
               background:
                 "linear-gradient(135deg, rgba(0,0,0,0.9) 0%, rgba(60,60,60,0.9) 100%)",
-              py: { xs: 4, sm: 5 },
-              px: { xs: 3, sm: 4 },
+              py: { xs: 3, sm: 4, md: 5 },
+              px: { xs: 2, sm: 3, md: 4 },
               textAlign: "center",
             }}
           >
@@ -117,9 +120,9 @@ const ContactUs = () => {
               sx={{
                 color: "white",
                 fontWeight: 700,
-                mb: 1,
-                letterSpacing: ".2rem",
-                fontSize: { xs: "1.5rem", sm: "2rem" },
+                mb: { xs: 0.75, sm: 1 },
+                letterSpacing: { xs: ".15rem", sm: ".2rem" },
+                fontSize: { xs: "1.5rem", sm: "1.75rem", md: "2rem" },
               }}
             >
               Digitronix
@@ -134,12 +137,17 @@ const ContactUs = () => {
               Get in touch with us. We'd love to hear from you!
             </Typography>
           </Box>
-          <Box sx={{ p: { xs: 3, sm: 4 } }}>
+          <Box sx={{ p: { xs: 2, sm: 3, md: 4 } }}>
             <form onSubmit={handleSubmit(contactSubmit)}>
-              <Box sx={{ mb: 3 }}>
+              <Box sx={{ mb: { xs: 2, sm: 2.5, md: 3 } }}>
                 <Typography
                   variant="body2"
-                  sx={{ mb: 1, fontWeight: 600, color: "rgba(0,0,0,0.8)" }}
+                  sx={{
+                    mb: 1,
+                    fontWeight: 600,
+                    color: "rgba(0,0,0,0.8)",
+                    fontSize: { xs: "0.875rem", sm: "0.95rem" },
+                  }}
                 >
                   Full Name
                 </Typography>
@@ -156,12 +164,16 @@ const ContactUs = () => {
                         "& .MuiOutlinedInput-root": {
                           borderRadius: 2,
                           backgroundColor: "rgba(0,0,0,0.03)",
+                          fontSize: { xs: "0.875rem", sm: "1rem" },
                           "&:hover fieldset": {
                             borderColor: "rgba(0,0,0,0.6)",
                           },
                           "&.Mui-focused fieldset": {
                             borderColor: "rgba(0,0,0,0.8)",
                           },
+                        },
+                        "& input": {
+                          py: { xs: 1.25, sm: 1.5 },
                         },
                       }}
                     />
@@ -170,17 +182,27 @@ const ContactUs = () => {
                 {errors?.name && (
                   <Typography
                     variant="caption"
-                    sx={{ color: "error.main", mt: 0.5, display: "block" }}
+                    sx={{
+                      color: "error.main",
+                      mt: 0.5,
+                      display: "block",
+                      fontSize: { xs: "0.7rem", sm: "0.75rem" },
+                    }}
                   >
                     {errors.name.message}
                   </Typography>
                 )}
               </Box>
 
-              <Box sx={{ mb: 3 }}>
+              <Box sx={{ mb: { xs: 2, sm: 2.5, md: 3 } }}>
                 <Typography
                   variant="body2"
-                  sx={{ mb: 1, fontWeight: 600, color: "rgba(0,0,0,0.8)" }}
+                  sx={{
+                    mb: 1,
+                    fontWeight: 600,
+                    color: "rgba(0,0,0,0.8)",
+                    fontSize: { xs: "0.875rem", sm: "0.95rem" },
+                  }}
                 >
                   Email Address
                 </Typography>
@@ -198,12 +220,16 @@ const ContactUs = () => {
                         "& .MuiOutlinedInput-root": {
                           borderRadius: 2,
                           backgroundColor: "rgba(0,0,0,0.03)",
+                          fontSize: { xs: "0.875rem", sm: "1rem" },
                           "&:hover fieldset": {
                             borderColor: "rgba(0,0,0,0.6)",
                           },
                           "&.Mui-focused fieldset": {
                             borderColor: "rgba(0,0,0,0.8)",
                           },
+                        },
+                        "& input": {
+                          py: { xs: 1.25, sm: 1.5 },
                         },
                       }}
                     />
@@ -212,17 +238,27 @@ const ContactUs = () => {
                 {errors?.email && (
                   <Typography
                     variant="caption"
-                    sx={{ color: "error.main", mt: 0.5, display: "block" }}
+                    sx={{
+                      color: "error.main",
+                      mt: 0.5,
+                      display: "block",
+                      fontSize: { xs: "0.7rem", sm: "0.75rem" },
+                    }}
                   >
                     {errors.email.message}
                   </Typography>
                 )}
               </Box>
 
-              <Box sx={{ mb: 3 }}>
+              <Box sx={{ mb: { xs: 2, sm: 2.5, md: 3 } }}>
                 <Typography
                   variant="body2"
-                  sx={{ mb: 1, fontWeight: 600, color: "rgba(0,0,0,0.8)" }}
+                  sx={{
+                    mb: 1,
+                    fontWeight: 600,
+                    color: "rgba(0,0,0,0.8)",
+                    fontSize: { xs: "0.875rem", sm: "0.95rem" },
+                  }}
                 >
                   Subject
                 </Typography>
@@ -239,12 +275,16 @@ const ContactUs = () => {
                         "& .MuiOutlinedInput-root": {
                           borderRadius: 2,
                           backgroundColor: "rgba(0,0,0,0.03)",
+                          fontSize: { xs: "0.875rem", sm: "1rem" },
                           "&:hover fieldset": {
                             borderColor: "rgba(0,0,0,0.6)",
                           },
                           "&.Mui-focused fieldset": {
                             borderColor: "rgba(0,0,0,0.8)",
                           },
+                        },
+                        "& input": {
+                          py: { xs: 1.25, sm: 1.5 },
                         },
                       }}
                     />
@@ -253,17 +293,27 @@ const ContactUs = () => {
                 {errors?.subject && (
                   <Typography
                     variant="caption"
-                    sx={{ color: "error.main", mt: 0.5, display: "block" }}
+                    sx={{
+                      color: "error.main",
+                      mt: 0.5,
+                      display: "block",
+                      fontSize: { xs: "0.7rem", sm: "0.75rem" },
+                    }}
                   >
                     {errors.subject.message}
                   </Typography>
                 )}
               </Box>
 
-              <Box sx={{ mb: 3 }}>
+              <Box sx={{ mb: { xs: 2, sm: 2.5, md: 3 } }}>
                 <Typography
                   variant="body2"
-                  sx={{ mb: 1, fontWeight: 600, color: "rgba(0,0,0,0.8)" }}
+                  sx={{
+                    mb: 1,
+                    fontWeight: 600,
+                    color: "rgba(0,0,0,0.8)",
+                    fontSize: { xs: "0.875rem", sm: "0.95rem" },
+                  }}
                 >
                   Message
                 </Typography>
@@ -275,13 +325,14 @@ const ContactUs = () => {
                       {...field}
                       fullWidth
                       multiline
-                      rows={6}
+                      rows={{ xs: 4, sm: 5, md: 6 }}
                       placeholder="Tell us more about your inquiry..."
                       error={!!errors?.message}
                       sx={{
                         "& .MuiOutlinedInput-root": {
                           borderRadius: 2,
                           backgroundColor: "rgba(0,0,0,0.03)",
+                          fontSize: { xs: "0.875rem", sm: "1rem" },
                           "&:hover fieldset": {
                             borderColor: "rgba(0,0,0,0.6)",
                           },
@@ -296,7 +347,12 @@ const ContactUs = () => {
                 {errors?.message && (
                   <Typography
                     variant="caption"
-                    sx={{ color: "error.main", mt: 0.5, display: "block" }}
+                    sx={{
+                      color: "error.main",
+                      mt: 0.5,
+                      display: "block",
+                      fontSize: { xs: "0.7rem", sm: "0.75rem" },
+                    }}
                   >
                     {errors.message.message}
                   </Typography>
@@ -312,8 +368,8 @@ const ContactUs = () => {
                   textTransform: "none",
                   bgcolor: "rgba(0,0,0,0.8)",
                   borderRadius: 2,
-                  py: 1.5,
-                  fontSize: "1rem",
+                  py: { xs: 1.25, sm: 1.5 },
+                  fontSize: { xs: "0.95rem", sm: "1rem" },
                   fontWeight: 600,
                   "&:hover": {
                     bgcolor: "rgba(0,0,0,1)",
@@ -326,12 +382,18 @@ const ContactUs = () => {
               <Box
                 sx={{
                   textAlign: "center",
-                  mt: 3,
-                  pt: 3,
+                  mt: { xs: 2.5, sm: 3 },
+                  pt: { xs: 2.5, sm: 3 },
                   borderTop: "1px solid rgba(0,0,0,0.1)",
                 }}
               >
-                <Typography variant="body2" sx={{ color: "rgba(0,0,0,0.6)" }}>
+                <Typography
+                  variant="body2"
+                  sx={{
+                    color: "rgba(0,0,0,0.6)",
+                    fontSize: { xs: "0.875rem", sm: "0.95rem" },
+                  }}
+                >
                   <Link
                     to="/"
                     style={{
@@ -359,7 +421,11 @@ const ContactUs = () => {
         <Alert
           onClose={handleCloseSnackbar}
           severity={snackbarSeverity}
-          sx={{ width: "100%" ,color: "black"}}
+          sx={{
+            width: "100%",
+            color: "black",
+            fontSize: { xs: "0.875rem", sm: "1rem" },
+          }}
         >
           {snackbarMessage}
         </Alert>
@@ -369,4 +435,3 @@ const ContactUs = () => {
 };
 
 export default ContactUs;
-

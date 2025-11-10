@@ -7,19 +7,20 @@ const AboutUs = () => {
     <Box
       sx={{
         minHeight: "80vh",
-        py: { xs: 4, md: 6 },
+        py: { xs: 3, sm: 4, md: 5, lg: 6 },
+        px: { xs: 1.5, sm: 2, md: 2.5, lg: 3 },
         backgroundColor: "rgba(0,0,0,0.02)",
       }}
     >
       <Container maxWidth="lg">
         {/* Header Section */}
-        <Box sx={{ textAlign: "center", mb: 6 }}>
+        <Box sx={{ textAlign: "center", mb: { xs: 4, sm: 5, md: 5.5, lg: 6 } }}>
           <Typography
             variant="h2"
             sx={{
               fontWeight: 700,
-              mb: 2,
-              fontSize: { xs: "2rem", md: "3rem" },
+              mb: { xs: 1.5, sm: 1.75, md: 1.85, lg: 2 },
+              fontSize: { xs: "1.75rem", sm: "2rem", md: "2.5rem", lg: "3rem" },
               color: "rgba(0,0,0,0.9)",
             }}
           >
@@ -31,7 +32,14 @@ const AboutUs = () => {
               color: "rgba(0,0,0,0.7)",
               maxWidth: "800px",
               mx: "auto",
-              lineHeight: 1.8,
+              lineHeight: { xs: 1.6, sm: 1.7, md: 1.75, lg: 1.8 },
+              fontSize: {
+                xs: "0.95rem",
+                sm: "1rem",
+                md: "1.15rem",
+                lg: "1.25rem",
+              },
+              px: { xs: 1, sm: 2 },
             }}
           >
             Your trusted destination for the latest electronics and technology
@@ -41,26 +49,60 @@ const AboutUs = () => {
         </Box>
 
         {/* Mission & Vision */}
-        <Grid container spacing={4} sx={{ mb: 6 }}>
+        <Grid
+          container
+          spacing={{ xs: 2.5, sm: 3, md: 3.5, lg: 4 }}
+          sx={{ mb: { xs: 4, sm: 5, md: 5.5, lg: 6 } }}
+        >
           <Grid item xs={12} md={6}>
             <Card
               sx={{
-                p: 4,
+                p: { xs: 2.5, sm: 3, md: 3.5, lg: 4 },
                 height: "100%",
-                  backgroundColor: "rgba(0,0,0,0.3)",
-                borderRadius: 3,
+                backgroundColor: "rgba(255,255,255,0.8)",
+                borderRadius: { xs: 2, sm: 2.5, md: 2.75, lg: 3 },
                 boxShadow: 2,
+                transition: "transform 0.3s ease, box-shadow 0.3s ease",
+                "&:hover": {
+                  transform: "translateY(-4px)",
+                  boxShadow: 4,
+                },
               }}
             >
               <Business
-                sx={{ fontSize: 48, color: "rgba(0,0,0,0.8)", mb: 2 }}
+                sx={{
+                  fontSize: { xs: 40, sm: 44, md: 46, lg: 48 },
+                  color: "rgba(0,0,0,0.8)",
+                  mb: { xs: 1.5, sm: 1.75, md: 1.85, lg: 2 },
+                }}
               />
-              <Typography variant="h5" sx={{ fontWeight: 600, mb: 2 }}>
+              <Typography
+                variant="h5"
+                sx={{
+                  fontWeight: 600,
+                  mb: { xs: 1.5, sm: 1.75, md: 1.85, lg: 2 },
+                  fontSize: {
+                    xs: "1.15rem",
+                    sm: "1.25rem",
+                    md: "1.35rem",
+                    lg: "1.5rem",
+                  },
+                }}
+              >
                 Our Mission
               </Typography>
               <Typography
                 variant="body1"
-                sx={{ color: "rgba(0,0,0,0.7)", lineHeight: 1.8 }}
+                sx={{
+                  color: "rgba(0,0,0,0.7)",
+                  lineHeight: { xs: 1.6, sm: 1.7, md: 1.75, lg: 1.8 },
+                  fontSize: {
+                    xs: "0.9rem",
+                    sm: "0.95rem",
+                    md: "1rem",
+                    lg: "1rem",
+                  },
+                }}
               >
                 To provide customers with the latest technology products at
                 affordable prices while maintaining the highest standards of
@@ -72,20 +114,52 @@ const AboutUs = () => {
           <Grid item xs={12} md={6}>
             <Card
               sx={{
-                p: 4,
+                p: { xs: 2.5, sm: 3, md: 3.5, lg: 4 },
                 height: "100%",
-                  backgroundColor: "rgba(0,0,0,0.3)",
-                borderRadius: 3,
+                backgroundColor: "rgba(255,255,255,0.8)",
+                borderRadius: { xs: 2, sm: 2.5, md: 2.75, lg: 3 },
                 boxShadow: 2,
+                transition: "transform 0.3s ease, box-shadow 0.3s ease",
+                "&:hover": {
+                  transform: "translateY(-4px)",
+                  boxShadow: 4,
+                },
               }}
             >
-              <Star sx={{ fontSize: 48, color: "rgba(0,0,0,0.8)", mb: 2 }} />
-              <Typography variant="h5" sx={{ fontWeight: 600, mb: 2 }}>
+              <Star
+                sx={{
+                  fontSize: { xs: 40, sm: 44, md: 46, lg: 48 },
+                  color: "rgba(0,0,0,0.8)",
+                  mb: { xs: 1.5, sm: 1.75, md: 1.85, lg: 2 },
+                }}
+              />
+              <Typography
+                variant="h5"
+                sx={{
+                  fontWeight: 600,
+                  mb: { xs: 1.5, sm: 1.75, md: 1.85, lg: 2 },
+                  fontSize: {
+                    xs: "1.15rem",
+                    sm: "1.25rem",
+                    md: "1.35rem",
+                    lg: "1.5rem",
+                  },
+                }}
+              >
                 Our Vision
               </Typography>
               <Typography
                 variant="body1"
-                sx={{ color: "rgba(0,0,0,0.7)", lineHeight: 1.8 }}
+                sx={{
+                  color: "rgba(0,0,0,0.7)",
+                  lineHeight: { xs: 1.6, sm: 1.7, md: 1.75, lg: 1.8 },
+                  fontSize: {
+                    xs: "0.9rem",
+                    sm: "0.95rem",
+                    md: "1rem",
+                    lg: "1rem",
+                  },
+                }}
               >
                 To become the leading e-commerce platform for electronics in the
                 region, known for innovation, reliability, and exceptional
@@ -97,37 +171,79 @@ const AboutUs = () => {
         </Grid>
 
         {/* Values Section */}
-        <Box sx={{ mb: 6 }}>
+        <Box sx={{ mb: { xs: 4, sm: 5, md: 5.5, lg: 6 } }}>
           <Typography
             variant="h4"
             sx={{
               fontWeight: 700,
-              mb: 4,
+              mb: { xs: 3, sm: 3.5, md: 3.75, lg: 4 },
               textAlign: "center",
               color: "rgba(0,0,0,0.9)",
+              fontSize: {
+                xs: "1.5rem",
+                sm: "1.75rem",
+                md: "2rem",
+                lg: "2.125rem",
+              },
             }}
           >
             Our Core Values
           </Typography>
-          <Grid container spacing={3} justifyContent="center">
+          <Grid
+            container
+            spacing={{ xs: 2, sm: 2.5, md: 2.75, lg: 3 }}
+            justifyContent="center"
+          >
             <Grid item xs={12} sm={6} md={3}>
               <Card
                 sx={{
-                  p: 3,
+                  p: { xs: 2.5, sm: 2.75, md: 2.85, lg: 3 },
                   textAlign: "center",
-                  backgroundColor: "rgba(0,0,0,0.3)",
-                  borderRadius: 3,
+                  backgroundColor: "rgba(255,255,255,0.8)",
+                  borderRadius: { xs: 2, sm: 2.5, md: 2.75, lg: 3 },
                   boxShadow: 2,
                   height: "100%",
+                  transition: "transform 0.3s ease, box-shadow 0.3s ease",
+                  "&:hover": {
+                    transform: "translateY(-4px)",
+                    boxShadow: 4,
+                  },
                 }}
               >
                 <People
-                  sx={{ fontSize: 40, color: "rgba(0,0,0,0.8)", mb: 2 }}
+                  sx={{
+                    fontSize: { xs: 36, sm: 38, md: 39, lg: 40 },
+                    color: "rgba(0,0,0,0.8)",
+                    mb: { xs: 1.5, sm: 1.75, md: 1.85, lg: 2 },
+                  }}
                 />
-                <Typography variant="h6" sx={{ fontWeight: 600, mb: 1 }}>
+                <Typography
+                  variant="h6"
+                  sx={{
+                    fontWeight: 600,
+                    mb: { xs: 0.85, sm: 0.9, md: 0.95, lg: 1 },
+                    fontSize: {
+                      xs: "1rem",
+                      sm: "1.1rem",
+                      md: "1.15rem",
+                      lg: "1.25rem",
+                    },
+                  }}
+                >
                   Customer First
                 </Typography>
-                <Typography variant="body2" sx={{ color: "rgba(0,0,0,0.7)" }}>
+                <Typography
+                  variant="body2"
+                  sx={{
+                    color: "rgba(0,0,0,0.7)",
+                    fontSize: {
+                      xs: "0.8rem",
+                      sm: "0.85rem",
+                      md: "0.9rem",
+                      lg: "0.875rem",
+                    },
+                  }}
+                >
                   Our customers are at the heart of everything we do
                 </Typography>
               </Card>
@@ -135,19 +251,53 @@ const AboutUs = () => {
             <Grid item xs={12} sm={6} md={3}>
               <Card
                 sx={{
-                  p: 3,
+                  p: { xs: 2.5, sm: 2.75, md: 2.85, lg: 3 },
                   textAlign: "center",
-                  backgroundColor: "rgba(0,0,0,0.3)",
-                  borderRadius: 3,
+                  backgroundColor: "rgba(255,255,255,0.8)",
+                  borderRadius: { xs: 2, sm: 2.5, md: 2.75, lg: 3 },
                   boxShadow: 2,
                   height: "100%",
+                  transition: "transform 0.3s ease, box-shadow 0.3s ease",
+                  "&:hover": {
+                    transform: "translateY(-4px)",
+                    boxShadow: 4,
+                  },
                 }}
               >
-                <Star sx={{ fontSize: 40, color: "rgba(0,0,0,0.8)", mb: 2 }} />
-                <Typography variant="h6" sx={{ fontWeight: 600, mb: 1 }}>
+                <Star
+                  sx={{
+                    fontSize: { xs: 36, sm: 38, md: 39, lg: 40 },
+                    color: "rgba(0,0,0,0.8)",
+                    mb: { xs: 1.5, sm: 1.75, md: 1.85, lg: 2 },
+                  }}
+                />
+                <Typography
+                  variant="h6"
+                  sx={{
+                    fontWeight: 600,
+                    mb: { xs: 0.85, sm: 0.9, md: 0.95, lg: 1 },
+                    fontSize: {
+                      xs: "1rem",
+                      sm: "1.1rem",
+                      md: "1.15rem",
+                      lg: "1.25rem",
+                    },
+                  }}
+                >
                   Quality
                 </Typography>
-                <Typography variant="body2" sx={{ color: "rgba(0,0,0,0.7)" }}>
+                <Typography
+                  variant="body2"
+                  sx={{
+                    color: "rgba(0,0,0,0.7)",
+                    fontSize: {
+                      xs: "0.8rem",
+                      sm: "0.85rem",
+                      md: "0.9rem",
+                      lg: "0.875rem",
+                    },
+                  }}
+                >
                   We ensure only the best products reach our customers
                 </Typography>
               </Card>
@@ -155,21 +305,53 @@ const AboutUs = () => {
             <Grid item xs={12} sm={6} md={3}>
               <Card
                 sx={{
-                  p: 3,
+                  p: { xs: 2.5, sm: 2.75, md: 2.85, lg: 3 },
                   textAlign: "center",
-                  backgroundColor: "rgba(0,0,0,0.3)",
-                  borderRadius: 3,
+                  backgroundColor: "rgba(255,255,255,0.8)",
+                  borderRadius: { xs: 2, sm: 2.5, md: 2.75, lg: 3 },
                   boxShadow: 2,
                   height: "100%",
+                  transition: "transform 0.3s ease, box-shadow 0.3s ease",
+                  "&:hover": {
+                    transform: "translateY(-4px)",
+                    boxShadow: 4,
+                  },
                 }}
               >
                 <LocalShipping
-                  sx={{ fontSize: 40, color: "rgba(0,0,0,0.8)", mb: 2 }}
+                  sx={{
+                    fontSize: { xs: 36, sm: 38, md: 39, lg: 40 },
+                    color: "rgba(0,0,0,0.8)",
+                    mb: { xs: 1.5, sm: 1.75, md: 1.85, lg: 2 },
+                  }}
                 />
-                <Typography variant="h6" sx={{ fontWeight: 600, mb: 1 }}>
+                <Typography
+                  variant="h6"
+                  sx={{
+                    fontWeight: 600,
+                    mb: { xs: 0.85, sm: 0.9, md: 0.95, lg: 1 },
+                    fontSize: {
+                      xs: "1rem",
+                      sm: "1.1rem",
+                      md: "1.15rem",
+                      lg: "1.25rem",
+                    },
+                  }}
+                >
                   Reliability
                 </Typography>
-                <Typography variant="body2" sx={{ color: "rgba(0,0,0,0.7)" }}>
+                <Typography
+                  variant="body2"
+                  sx={{
+                    color: "rgba(0,0,0,0.7)",
+                    fontSize: {
+                      xs: "0.8rem",
+                      sm: "0.85rem",
+                      md: "0.9rem",
+                      lg: "0.875rem",
+                    },
+                  }}
+                >
                   Trusted delivery and service you can count on
                 </Typography>
               </Card>
@@ -177,21 +359,53 @@ const AboutUs = () => {
             <Grid item xs={12} sm={6} md={3}>
               <Card
                 sx={{
-                  p: 3,
+                  p: { xs: 2.5, sm: 2.75, md: 2.85, lg: 3 },
                   textAlign: "center",
-                  backgroundColor: "rgba(0,0,0,0.3)",
-                  borderRadius: 3,
+                  backgroundColor: "rgba(255,255,255,0.8)",
+                  borderRadius: { xs: 2, sm: 2.5, md: 2.75, lg: 3 },
                   boxShadow: 2,
                   height: "100%",
+                  transition: "transform 0.3s ease, box-shadow 0.3s ease",
+                  "&:hover": {
+                    transform: "translateY(-4px)",
+                    boxShadow: 4,
+                  },
                 }}
               >
                 <Business
-                  sx={{ fontSize: 40, color: "rgba(0,0,0,0.8)", mb: 2 }}
+                  sx={{
+                    fontSize: { xs: 36, sm: 38, md: 39, lg: 40 },
+                    color: "rgba(0,0,0,0.8)",
+                    mb: { xs: 1.5, sm: 1.75, md: 1.85, lg: 2 },
+                  }}
                 />
-                <Typography variant="h6" sx={{ fontWeight: 600, mb: 1 }}>
+                <Typography
+                  variant="h6"
+                  sx={{
+                    fontWeight: 600,
+                    mb: { xs: 0.85, sm: 0.9, md: 0.95, lg: 1 },
+                    fontSize: {
+                      xs: "1rem",
+                      sm: "1.1rem",
+                      md: "1.15rem",
+                      lg: "1.25rem",
+                    },
+                  }}
+                >
                   Innovation
                 </Typography>
-                <Typography variant="body2" sx={{ color: "rgba(0,0,0,0.7)" }}>
+                <Typography
+                  variant="body2"
+                  sx={{
+                    color: "rgba(0,0,0,0.7)",
+                    fontSize: {
+                      xs: "0.8rem",
+                      sm: "0.85rem",
+                      md: "0.9rem",
+                      lg: "0.875rem",
+                    },
+                  }}
+                >
                   Staying ahead with the latest technology trends
                 </Typography>
               </Card>
@@ -202,18 +416,29 @@ const AboutUs = () => {
         {/* Story Section */}
         <Card
           sx={{
-            p: { xs: 3, md: 5 },
-                  backgroundColor: "rgba(0,0,0,0.3)",
-            borderRadius: 3,
+            p: { xs: 2.5, sm: 3, md: 4, lg: 5 },
+            backgroundColor: "rgba(255,255,255,0.8)",
+            borderRadius: { xs: 2, sm: 2.5, md: 2.75, lg: 3 },
             boxShadow: 2,
+            transition: "transform 0.3s ease, box-shadow 0.3s ease",
+            "&:hover": {
+              transform: "translateY(-4px)",
+              boxShadow: 4,
+            },
           }}
         >
           <Typography
             variant="h4"
             sx={{
               fontWeight: 700,
-              mb: 3,
+              mb: { xs: 2, sm: 2.5, md: 2.75, lg: 3 },
               color: "rgba(0,0,0,0.9)",
+              fontSize: {
+                xs: "1.5rem",
+                sm: "1.75rem",
+                md: "2rem",
+                lg: "2.125rem",
+              },
             }}
           >
             Our Story
@@ -222,9 +447,14 @@ const AboutUs = () => {
             variant="body1"
             sx={{
               color: "rgba(0,0,0,0.7)",
-              lineHeight: 1.8,
-              mb: 3,
-              fontSize: "1.1rem",
+              lineHeight: { xs: 1.6, sm: 1.7, md: 1.75, lg: 1.8 },
+              mb: { xs: 2, sm: 2.5, md: 2.75, lg: 3 },
+              fontSize: {
+                xs: "0.95rem",
+                sm: "1rem",
+                md: "1.05rem",
+                lg: "1.1rem",
+              },
             }}
           >
             Digitronix was founded with a simple mission: to make cutting-edge
@@ -236,8 +466,13 @@ const AboutUs = () => {
             variant="body1"
             sx={{
               color: "rgba(0,0,0,0.7)",
-              lineHeight: 1.8,
-              fontSize: "1.1rem",
+              lineHeight: { xs: 1.6, sm: 1.7, md: 1.75, lg: 1.8 },
+              fontSize: {
+                xs: "0.95rem",
+                sm: "1rem",
+                md: "1.05rem",
+                lg: "1.1rem",
+              },
             }}
           >
             We carefully curate our product selection, working directly with

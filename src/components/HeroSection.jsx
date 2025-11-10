@@ -27,17 +27,52 @@ const HeroSection = () => {
   };
 
   return (
-    <Box className="relative h-screen w-full overflow-hidden">
+    <Box
+      sx={{
+        position: "relative",
+        height: { 
+          xs: "65vh",
+          sm: "75vh",      
+          md: "85vh",   
+          lg: "100vh"
+        },
+        width: "100%",
+        overflow: "hidden",
+        minHeight: { xs: "500px", sm: "550px", md: "600px" }
+      }}
+    >
+      {/* Background Image */}
       <Box
         component="img"
         src={BgImg}
-        alt="Grocery background"
-        className="absolute inset-0 h-full w-full object-cover"
+        alt="Electronics background"
+        sx={{
+          position: "absolute",
+          inset: 0,
+          height: "100%",
+          width: "100%",
+          objectFit: "cover",
+        }}
       />
 
-      <Box className="absolute inset-0 mt-8 flex w-full flex-col items-center justify-center p-5 text-center">
+      {/* Content Overlay */}
+      <Box
+        sx={{
+          position: "absolute",
+          inset: 0,
+          mt: { xs: 3, sm: 5, md: 6, lg: 8 },
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+          p: { xs: 2, sm: 3, md: 4, lg: 5 },
+          textAlign: "center",
+        }}
+      >
+        {/* Welcome Title */}
         <Typography
-          variant="h4"
+          variant="h1"
+          component="h1"
           sx={{
             fontWeight: "bold",
             background:
@@ -46,18 +81,57 @@ const HeroSection = () => {
             WebkitTextFillColor: "transparent",
             backgroundClip: "text",
             fontSize: {
-              xs: "1.5rem",
-              sm: "1.75rem",
-              md: "2rem",
-              lg: "2.5rem",
-              xl: "3rem",
+              xs: "1.5rem",    
+              sm: "1.85rem",    
+              md: "2.25rem",
+              lg: "2.75rem",   
+              xl: "3.25rem",   
             },
+            mb: { xs: 3, sm: 5, md: 6, lg: 8 },
+            letterSpacing: { xs: "0.02em", sm: "0.03em", md: "0.04em" },
+            lineHeight: 1.2,
+            px: { xs: 1, sm: 2 },
           }}
         >
           Welcome to Digitronix
         </Typography>
-        <Box className="w-full max-w-3xl mt-8">
-          <Box className="flex bg-white rounded-lg shadow-md overflow-hidden">
+
+        {/* Search Container */}
+        <Box
+          sx={{
+            width: "100%",
+            maxWidth: { 
+              xs: "95%",        
+              sm: "540px",      
+              md: "720px",   
+              lg: "860px",   
+              xl: "960px"    
+            },
+            px: { xs: 1, sm: 2, md: 0 },
+          }}
+        >
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: { xs: "column", sm: "row" },
+              backgroundColor: "white",
+              borderRadius: { xs: 2, sm: 2.5, md: 3 },
+              boxShadow: { 
+                xs: "0 4px 12px rgba(0,0,0,0.15)", 
+                sm: "0 6px 16px rgba(0,0,0,0.2)",
+                md: "0 8px 20px rgba(0,0,0,0.25)"
+              },
+              overflow: "hidden",
+              transition: "box-shadow 0.3s ease",
+              "&:hover": {
+                boxShadow: { 
+                  xs: "0 6px 16px rgba(0,0,0,0.2)",
+                  sm: "0 8px 20px rgba(0,0,0,0.25)",
+                  md: "0 10px 24px rgba(0,0,0,0.3)"
+                },
+              },
+            }}
+          >
             {/* Filter Dropdown */}
             <Select
               value={filterCategory}
@@ -66,23 +140,54 @@ const HeroSection = () => {
                 dispatch(setFilterCategory(e.target.value));
               }}
               displayEmpty
-              startAdornment={<FilterListIcon sx={{ mr: 1, color: "white" }} />}
+              startAdornment={
+                <FilterListIcon sx={{ 
+                  mr: { xs: 0.75, sm: 1 }, 
+                  color: "white",
+                  fontSize: { xs: 18, sm: 20, md: 22 }
+                }} />
+              }
               sx={{
-                minWidth: "180px",
+                minWidth: { 
+                  xs: "100%",       
+                  sm: "150px",      
+                  md: "170px",      
+                  lg: "190px"    
+                },
                 backgroundColor: "rgba(0,0,0,0.7)",
                 color: "white",
+                fontSize: { xs: "0.8rem", sm: "0.875rem", md: "0.95rem", lg: "1rem" },
+                fontWeight: 500,
                 "& .MuiOutlinedInput-notchedOutline": { border: "none" },
                 "& .MuiSvgIcon-root": { color: "white" },
-                "&:hover": { backgroundColor: "rgba(0,0,0,0.8)" },
-                borderRadius: "8px 0 0 8px",
+                "&:hover": { 
+                  backgroundColor: "rgba(0,0,0,0.8)" 
+                },
+                "&.Mui-focused": {
+                  backgroundColor: "rgba(0,0,0,0.85)"
+                },
+                borderRadius: { 
+                  xs: "8px 8px 0 0",  
+                  sm: "8px 0 0 8px"   
+                },
+                py: { xs: 0.5, sm: 0.75, md: 1 },
               }}
             >
-              <MenuItem value="all">All Categories</MenuItem>
-              <MenuItem value="audio">Audio Devices</MenuItem>
-              <MenuItem value="accessories">Accessories</MenuItem>
-              <MenuItem value="charging">Charging</MenuItem>
+              <MenuItem value="all" sx={{ fontSize: { xs: "0.8rem", sm: "0.875rem", md: "1rem" } }}>
+                All Categories
+              </MenuItem>
+              <MenuItem value="audio" sx={{ fontSize: { xs: "0.8rem", sm: "0.875rem", md: "1rem" } }}>
+                Audio Devices
+              </MenuItem>
+              <MenuItem value="accessories" sx={{ fontSize: { xs: "0.8rem", sm: "0.875rem", md: "1rem" } }}>
+                Accessories
+              </MenuItem>
+              <MenuItem value="charging" sx={{ fontSize: { xs: "0.8rem", sm: "0.875rem", md: "1rem" } }}>
+                Charging
+              </MenuItem>
             </Select>
 
+            {/* Search Input */}
             <TextField
               fullWidth
               placeholder="Search your products from here"
@@ -90,28 +195,87 @@ const HeroSection = () => {
               onChange={(e) => dispatch(searchItem(e.target.value))}
               sx={{
                 "& fieldset": { border: "none" },
-                backgroundColor: "rgba(0,0,0,0.2)",
+                backgroundColor: "rgba(0,0,0,0.02)",
+                transition: "background-color 0.2s ease",
+                "&:hover": {
+                  backgroundColor: "rgba(0,0,0,0.04)",
+                },
+                "& input": {
+                  fontSize: { 
+                    xs: "0.8rem",      
+                    sm: "0.875rem",    
+                    md: "0.95rem",     
+                    lg: "1rem"         
+                  },
+                  py: { xs: 1.4, sm: 1.6, md: 1.75 },
+                  px: { xs: 1.5, sm: 2, md: 2.5 },
+                  "&::placeholder": {
+                    opacity: 0.7,
+                    fontSize: { xs: "0.75rem", sm: "0.85rem", md: "0.95rem" }
+                  },
+                },
               }}
             />
 
+            {/* Search Button */}
             <Button
               type="submit"
-              startIcon={<SearchIcon />}
+              startIcon={
+                <SearchIcon sx={{ 
+                  fontSize: { xs: 16, sm: 18, md: 20, lg: 22 },
+                  display: { xs: "none", sm: "block" }  
+                }} />
+              }
               variant="contained"
-              onClick={() => handleSearchClick()}
+              onClick={handleSearchClick}
               sx={{
-                bgcolor: "rgba(0,0,0,0.7)",
-                px: 3,
-                borderRadius: "0 8px 8px 0",
-                minWidth: "120px",
+                bgcolor: "rgba(0,0,0,0.75)",
+                px: { xs: 2, sm: 2.5, md: 3, lg: 3.5 },
+                py: { xs: 1.4, sm: 1.6, md: 1.75 },
+                borderRadius: { 
+                  xs: "0 0 8px 8px",  
+                  sm: "0 8px 8px 0"   
+                },
+                minWidth: { xs: "100%", sm: "100px", md: "120px", lg: "140px" },
+                fontSize: { 
+                  xs: "0.8rem", 
+                  sm: "0.875rem", 
+                  md: "0.95rem", 
+                  lg: "1rem" 
+                },
+                fontWeight: 600,
                 textTransform: "none",
-                "&:hover": { bgcolor: "rgba(0,0,0,0.8)" },
+                whiteSpace: "nowrap",
+                transition: "all 0.2s ease",
+                "&:hover": { 
+                  bgcolor: "rgba(0,0,0,0.9)",
+                  transform: { sm: "translateY(-1px)" },
+                  boxShadow: { sm: "0 4px 8px rgba(0,0,0,0.2)" }
+                },
+                "&:active": {
+                  transform: "translateY(0)",
+                },
               }}
             >
               Search
             </Button>
           </Box>
         </Box>
+
+        {/* Optional: Search Hint Text */}
+        <Typography
+          variant="caption"
+          sx={{
+            mt: { xs: 2, sm: 3, md: 4 },
+            color: "white",
+            fontSize: { xs: "0.7rem", sm: "0.75rem", md: "0.8rem" },
+            display: { xs: "none", sm: "block" },
+            textAlign: "center",
+            px: 2,
+          }}
+        >
+          Press Enter or click Search to find your favorite products
+        </Typography>
       </Box>
     </Box>
   );

@@ -31,9 +31,15 @@ const ProductDetailPage = () => {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
+          p: 2,
         }}
       >
-        <Typography variant="h4">Product not found</Typography>
+        <Typography
+          variant="h4"
+          sx={{ fontSize: { xs: "1.5rem", sm: "2rem", md: "2.5rem" } }}
+        >
+          Product not found
+        </Typography>
       </Box>
     );
   }
@@ -49,14 +55,21 @@ const ProductDetailPage = () => {
   };
 
   return (
-    <Box sx={{ p: { xs: 2, md: 4 }, maxWidth: "1400px", mx: "auto" }}>
+    <Box
+      sx={{
+        p: { xs: 2, sm: 3, md: 4 },
+        maxWidth: "1400px",
+        mx: "auto",
+      }}
+    >
       {/* Back Button */}
       <Button
-        startIcon={<ArrowBackIcon />}
+        startIcon={<ArrowBackIcon sx={{ fontSize: { xs: 18, sm: 20 } }} />}
         onClick={() => navigate(-1)}
         sx={{
-          mb: 3,
+          mb: { xs: 2, sm: 3 },
           color: "rgba(0,0,0,0.7)",
+          fontSize: { xs: "0.875rem", sm: "1rem" },
           "&:hover": { backgroundColor: "rgba(0,0,0,0.05)" },
         }}
       >
@@ -68,9 +81,9 @@ const ProductDetailPage = () => {
         sx={{
           display: "flex",
           flexDirection: { xs: "column", md: "row" },
-          gap: 4,
+          gap: { xs: 3, sm: 4 },
           alignItems: { xs: "stretch", md: "flex-start" },
-          mb: 4,
+          mb: { xs: 4, sm: 6, md: 8 },
         }}
       >
         {/* IMAGE LEFT */}
@@ -82,12 +95,11 @@ const ProductDetailPage = () => {
         >
           <Card
             sx={{
-              p: 4,
+              p: { xs: 2, sm: 3, md: 4 },
               backgroundColor: "rgba(0,0,0,0.05)",
-              borderRadius: 3,
+              borderRadius: { xs: 2, md: 3 },
               width: "100%",
-              height: { xs: "auto", md: "500px" },
-              minHeight: { xs: "300px", md: "500px" },
+              height: { xs: "300px", sm: "400px", md: "500px" },
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
@@ -120,10 +132,11 @@ const ProductDetailPage = () => {
           <Chip
             label={product.category.toUpperCase()}
             sx={{
-              mb: 2,
+              mb: { xs: 1.5, sm: 2 },
               backgroundColor: "rgba(0,0,0,0.8)",
               color: "white",
               fontWeight: 600,
+              fontSize: { xs: "0.75rem", sm: "0.875rem" },
             }}
           />
 
@@ -131,8 +144,8 @@ const ProductDetailPage = () => {
             variant="h3"
             sx={{
               fontWeight: 700,
-              mb: 2,
-              fontSize: { xs: "2rem", md: "2.5rem" },
+              mb: { xs: 1.5, sm: 2 },
+              fontSize: { xs: "1.5rem", sm: "2rem", md: "2.5rem" },
             }}
           >
             {product.name}
@@ -143,7 +156,8 @@ const ProductDetailPage = () => {
             sx={{
               color: "rgba(0,0,0,0.8)",
               fontWeight: 600,
-              mb: 3,
+              mb: { xs: 2, sm: 3 },
+              fontSize: { xs: "1.5rem", sm: "2rem", md: "2.5rem" },
             }}
           >
             RS {product.price}
@@ -155,6 +169,7 @@ const ProductDetailPage = () => {
               fontWeight: 600,
               mb: 1,
               color: "rgba(0,0,0,0.8)",
+              fontSize: { xs: "1rem", sm: "1.15rem", md: "1.25rem" },
             }}
           >
             Description
@@ -162,9 +177,10 @@ const ProductDetailPage = () => {
           <Typography
             variant="body1"
             sx={{
-              mb: 3,
+              mb: { xs: 2, sm: 3 },
               lineHeight: 1.8,
               color: "rgba(0,0,0,0.7)",
+              fontSize: { xs: "0.875rem", sm: "1rem" },
             }}
           >
             {product.description}
@@ -177,8 +193,9 @@ const ProductDetailPage = () => {
                 variant="h6"
                 sx={{
                   fontWeight: 600,
-                  mb: 2,
+                  mb: { xs: 1.5, sm: 2 },
                   color: "rgba(0,0,0,0.8)",
+                  fontSize: { xs: "1rem", sm: "1.15rem", md: "1.25rem" },
                 }}
               >
                 Specifications
@@ -186,9 +203,9 @@ const ProductDetailPage = () => {
               <Box
                 sx={{
                   backgroundColor: "rgba(0,0,0,0.05)",
-                  p: 2,
+                  p: { xs: 1.5, sm: 2 },
                   borderRadius: 2,
-                  mb: 3,
+                  mb: { xs: 2, sm: 3 },
                 }}
               >
                 {product.specifications.map((spec, index) => (
@@ -198,6 +215,7 @@ const ProductDetailPage = () => {
                     sx={{
                       mb: 1,
                       color: "rgba(0,0,0,0.7)",
+                      fontSize: { xs: "0.875rem", sm: "1rem" },
                     }}
                   >
                     • {spec}
@@ -210,17 +228,22 @@ const ProductDetailPage = () => {
           <Button
             variant="contained"
             size="large"
-            startIcon={<AddShoppingCartIcon />}
+            startIcon={
+              <AddShoppingCartIcon
+                sx={{ fontSize: { xs: 18, sm: 20, md: 22 } }}
+              />
+            }
             onClick={handleAddToCart}
             sx={{
               backgroundColor: "rgba(0,0,0,0.8)",
               color: "white",
-              px: 4,
-              py: 1.5,
-              fontSize: "1.1rem",
+              px: { xs: 3, sm: 4 },
+              py: { xs: 1, sm: 1.5 },
+              fontSize: { xs: "0.95rem", sm: "1rem", md: "1.1rem" },
               fontWeight: 600,
               borderRadius: 2,
               textTransform: "none",
+              width: { xs: "100%", sm: "auto" },
               "&:hover": {
                 backgroundColor: "rgba(0,0,0,1)",
               },
@@ -233,19 +256,20 @@ const ProductDetailPage = () => {
 
       {/* Related Products Section */}
       {relatedProducts.length > 0 && (
-        <Box sx={{ mt: 8 }}>
+        <Box sx={{ mt: { xs: 6, sm: 8 } }}>
           <Typography
             variant="h4"
             sx={{
               fontWeight: 700,
-              mb: 4,
+              mb: { xs: 3, sm: 4 },
               textAlign: "center",
+              fontSize: { xs: "1.5rem", sm: "2rem", md: "2.5rem" },
             }}
           >
             You May Also Like
           </Typography>
 
-          <Grid container spacing={3} justifyContent="center">
+          <Grid container spacing={{ xs: 2, sm: 3 }} justifyContent="center">
             {relatedProducts.map((relatedProduct) => (
               <Grid item xs={12} sm={6} md={4} key={relatedProduct.id}>
                 <Card
@@ -253,9 +277,9 @@ const ProductDetailPage = () => {
                     height: "100%",
                     display: "flex",
                     flexDirection: "column",
-                    p: 2,
+                    p: { xs: 1.5, sm: 2 },
                     backgroundColor: "rgba(0,0,0,0.05)",
-                    borderRadius: 3,
+                    borderRadius: { xs: 2, md: 3 },
                     cursor: "pointer",
                     transition: "transform 0.2s",
                     "&:hover": {
@@ -271,23 +295,31 @@ const ProductDetailPage = () => {
                     alt={relatedProduct.name}
                     sx={{
                       width: "100%",
-                      height: "180px",
+                      height: { xs: "150px", sm: "180px" },
                       objectFit: "contain",
-                      mb: 2,
+                      mb: { xs: 1.5, sm: 2 },
                     }}
                   />
-                  <Typography variant="h6" sx={{ mb: 1, fontWeight: 600 }}>
+                  <Typography
+                    variant="h6"
+                    sx={{
+                      mb: 1,
+                      fontWeight: 600,
+                      fontSize: { xs: "1rem", sm: "1.15rem", md: "1.25rem" },
+                    }}
+                  >
                     {relatedProduct.name}
                   </Typography>
                   <Typography
                     variant="body2"
                     sx={{
                       flexGrow: 1,
-                      mb: 2,
+                      mb: { xs: 1.5, sm: 2 },
                       color: "rgba(0,0,0,0.6)",
+                      fontSize: { xs: "0.875rem", sm: "1rem" },
                     }}
                   >
-                    {relatedProduct.description.slice(0, 60)}
+                    {relatedProduct.description.slice(0, 60)}...
                   </Typography>
                   <Box
                     sx={{
@@ -295,9 +327,17 @@ const ProductDetailPage = () => {
                       justifyContent: "space-between",
                       alignItems: "center",
                       mt: "auto",
+                      flexWrap: { xs: "wrap", sm: "nowrap" },
+                      gap: { xs: 1, sm: 0 },
                     }}
                   >
-                    <Typography variant="h6" sx={{ fontWeight: 600 }}>
+                    <Typography
+                      variant="h6"
+                      sx={{
+                        fontWeight: 600,
+                        fontSize: { xs: "1rem", sm: "1.15rem", md: "1.25rem" },
+                      }}
+                    >
                       RS {relatedProduct.price}
                     </Typography>
                     <Button
@@ -309,11 +349,13 @@ const ProductDetailPage = () => {
                       }}
                       sx={{
                         minWidth: "auto",
-                        p: 1,
+                        p: { xs: 0.75, sm: 1 },
                         color: "rgba(0,0,0,0.7)",
                       }}
                     >
-                      <AddShoppingCartIcon />
+                      <AddShoppingCartIcon
+                        sx={{ fontSize: { xs: 20, sm: 24 } }}
+                      />
                     </Button>
                   </Box>
                 </Card>

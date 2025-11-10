@@ -82,15 +82,16 @@ const Signup = () => {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          p: { xs: 2, sm: 3 },
+          p: { xs: 2, sm: 3, md: 4 },
+          py: { xs: 3, sm: 4, md: 5 },
         }}
       >
         <Card
           elevation={8}
           sx={{
-            maxWidth: 450,
+            maxWidth: { xs: "100%", sm: 420, md: 450 },
             width: "100%",
-            borderRadius: 3,
+            borderRadius: { xs: 2, sm: 3 },
             backgroundColor: "rgba(255,255,255,0.95)",
             backdropFilter: "blur(10px)",
           }}
@@ -99,8 +100,8 @@ const Signup = () => {
             sx={{
               background:
                 "linear-gradient(135deg, rgba(0,0,0,0.9) 0%, rgba(60,60,60,0.9) 100%)",
-              py: { xs: 4, sm: 5 },
-              px: { xs: 3, sm: 4 },
+              py: { xs: 3, sm: 4, md: 5 },
+              px: { xs: 2, sm: 3, md: 4 },
               textAlign: "center",
             }}
           >
@@ -109,9 +110,9 @@ const Signup = () => {
               sx={{
                 color: "white",
                 fontWeight: 700,
-                mb: 1,
-                letterSpacing: ".2rem",
-                fontSize: { xs: "1.5rem", sm: "2rem" },
+                mb: { xs: 0.75, sm: 1 },
+                letterSpacing: { xs: ".15rem", sm: ".2rem" },
+                fontSize: { xs: "1.5rem", sm: "1.75rem", md: "2rem" },
               }}
             >
               Digitronix
@@ -126,12 +127,17 @@ const Signup = () => {
               Create your account and start shopping
             </Typography>
           </Box>
-          <Box sx={{ p: { xs: 3, sm: 4 } }}>
+          <Box sx={{ p: { xs: 2, sm: 3, md: 4 } }}>
             <form onSubmit={handleSubmit(signupSubmit)}>
-              <Box sx={{ mb: 3 }}>
+              <Box sx={{ mb: { xs: 2, sm: 2.5, md: 3 } }}>
                 <Typography
                   variant="body2"
-                  sx={{ mb: 1, fontWeight: 600, color: "rgba(0,0,0,0.8)" }}
+                  sx={{
+                    mb: 1,
+                    fontWeight: 600,
+                    color: "rgba(0,0,0,0.8)",
+                    fontSize: { xs: "0.875rem", sm: "0.95rem" },
+                  }}
                 >
                   Full Name
                 </Typography>
@@ -148,12 +154,16 @@ const Signup = () => {
                         "& .MuiOutlinedInput-root": {
                           borderRadius: 2,
                           backgroundColor: "rgba(0,0,0,0.03)",
+                          fontSize: { xs: "0.875rem", sm: "1rem" },
                           "&:hover fieldset": {
                             borderColor: "rgba(0,0,0,0.6)",
                           },
                           "&.Mui-focused fieldset": {
                             borderColor: "rgba(0,0,0,0.8)",
                           },
+                        },
+                        "& input": {
+                          py: { xs: 1.25, sm: 1.5 },
                         },
                       }}
                     />
@@ -162,16 +172,26 @@ const Signup = () => {
                 {errors?.name && (
                   <Typography
                     variant="caption"
-                    sx={{ color: "error.main", mt: 0.5, display: "block" }}
+                    sx={{
+                      color: "error.main",
+                      mt: 0.5,
+                      display: "block",
+                      fontSize: { xs: "0.7rem", sm: "0.75rem" },
+                    }}
                   >
                     {errors.name.message}
                   </Typography>
                 )}
               </Box>
-              <Box sx={{ mb: 3 }}>
+              <Box sx={{ mb: { xs: 2, sm: 2.5, md: 3 } }}>
                 <Typography
                   variant="body2"
-                  sx={{ mb: 1, fontWeight: 600, color: "rgba(0,0,0,0.8)" }}
+                  sx={{
+                    mb: 1,
+                    fontWeight: 600,
+                    color: "rgba(0,0,0,0.8)",
+                    fontSize: { xs: "0.875rem", sm: "0.95rem" },
+                  }}
                 >
                   Email Address
                 </Typography>
@@ -189,12 +209,16 @@ const Signup = () => {
                         "& .MuiOutlinedInput-root": {
                           borderRadius: 2,
                           backgroundColor: "rgba(0,0,0,0.03)",
+                          fontSize: { xs: "0.875rem", sm: "1rem" },
                           "&:hover fieldset": {
                             borderColor: "rgba(0,0,0,0.6)",
                           },
                           "&.Mui-focused fieldset": {
                             borderColor: "rgba(0,0,0,0.8)",
                           },
+                        },
+                        "& input": {
+                          py: { xs: 1.25, sm: 1.5 },
                         },
                       }}
                     />
@@ -203,16 +227,26 @@ const Signup = () => {
                 {errors?.email && (
                   <Typography
                     variant="caption"
-                    sx={{ color: "error.main", mt: 0.5, display: "block" }}
+                    sx={{
+                      color: "error.main",
+                      mt: 0.5,
+                      display: "block",
+                      fontSize: { xs: "0.7rem", sm: "0.75rem" },
+                    }}
                   >
                     {errors.email.message}
                   </Typography>
                 )}
               </Box>
-              <Box sx={{ mb: 3 }}>
+              <Box sx={{ mb: { xs: 2, sm: 2.5, md: 3 } }}>
                 <Typography
                   variant="body2"
-                  sx={{ mb: 1, fontWeight: 600, color: "rgba(0,0,0,0.8)" }}
+                  sx={{
+                    mb: 1,
+                    fontWeight: 600,
+                    color: "rgba(0,0,0,0.8)",
+                    fontSize: { xs: "0.875rem", sm: "0.95rem" },
+                  }}
                 >
                   Password
                 </Typography>
@@ -230,12 +264,16 @@ const Signup = () => {
                         "& .MuiOutlinedInput-root": {
                           borderRadius: 2,
                           backgroundColor: "rgba(0,0,0,0.03)",
+                          fontSize: { xs: "0.875rem", sm: "1rem" },
                           "&:hover fieldset": {
                             borderColor: "rgba(0,0,0,0.6)",
                           },
                           "&.Mui-focused fieldset": {
                             borderColor: "rgba(0,0,0,0.8)",
                           },
+                        },
+                        "& input": {
+                          py: { xs: 1.25, sm: 1.5 },
                         },
                       }}
                       InputProps={{
@@ -244,11 +282,16 @@ const Signup = () => {
                             <IconButton
                               onClick={() => setShowPassword(!showPassword)}
                               edge="end"
+                              sx={{ p: { xs: 0.75, sm: 1 } }}
                             >
                               {showPassword ? (
-                                <VisibilityOff />
+                                <VisibilityOff
+                                  sx={{ fontSize: { xs: 20, sm: 24 } }}
+                                />
                               ) : (
-                                <Visibility />
+                                <Visibility
+                                  sx={{ fontSize: { xs: 20, sm: 24 } }}
+                                />
                               )}
                             </IconButton>
                           </InputAdornment>
@@ -260,16 +303,26 @@ const Signup = () => {
                 {errors?.password && (
                   <Typography
                     variant="caption"
-                    sx={{ color: "error.main", mt: 0.5, display: "block" }}
+                    sx={{
+                      color: "error.main",
+                      mt: 0.5,
+                      display: "block",
+                      fontSize: { xs: "0.7rem", sm: "0.75rem" },
+                    }}
                   >
                     {errors.password.message}
                   </Typography>
                 )}
               </Box>
-              <Box sx={{ mb: 3 }}>
+              <Box sx={{ mb: { xs: 2, sm: 2.5, md: 3 } }}>
                 <Typography
                   variant="body2"
-                  sx={{ mb: 1, fontWeight: 600, color: "rgba(0,0,0,0.8)" }}
+                  sx={{
+                    mb: 1,
+                    fontWeight: 600,
+                    color: "rgba(0,0,0,0.8)",
+                    fontSize: { xs: "0.875rem", sm: "0.95rem" },
+                  }}
                 >
                   Confirm Password
                 </Typography>
@@ -287,12 +340,16 @@ const Signup = () => {
                         "& .MuiOutlinedInput-root": {
                           borderRadius: 2,
                           backgroundColor: "rgba(0,0,0,0.03)",
+                          fontSize: { xs: "0.875rem", sm: "1rem" },
                           "&:hover fieldset": {
                             borderColor: "rgba(0,0,0,0.6)",
                           },
                           "&.Mui-focused fieldset": {
                             borderColor: "rgba(0,0,0,0.8)",
                           },
+                        },
+                        "& input": {
+                          py: { xs: 1.25, sm: 1.5 },
                         },
                       }}
                       InputProps={{
@@ -303,11 +360,16 @@ const Signup = () => {
                                 setShowConfirmPassword(!showConfirmPassword)
                               }
                               edge="end"
+                              sx={{ p: { xs: 0.75, sm: 1 } }}
                             >
                               {showConfirmPassword ? (
-                                <VisibilityOff />
+                                <VisibilityOff
+                                  sx={{ fontSize: { xs: 20, sm: 24 } }}
+                                />
                               ) : (
-                                <Visibility />
+                                <Visibility
+                                  sx={{ fontSize: { xs: 20, sm: 24 } }}
+                                />
                               )}
                             </IconButton>
                           </InputAdornment>
@@ -319,7 +381,12 @@ const Signup = () => {
                 {errors?.confirmPassword && (
                   <Typography
                     variant="caption"
-                    sx={{ color: "error.main", mt: 0.5, display: "block" }}
+                    sx={{
+                      color: "error.main",
+                      mt: 0.5,
+                      display: "block",
+                      fontSize: { xs: "0.7rem", sm: "0.75rem" },
+                    }}
                   >
                     {errors.confirmPassword.message}
                   </Typography>
@@ -334,8 +401,8 @@ const Signup = () => {
                   textTransform: "none",
                   bgcolor: "rgba(0,0,0,0.8)",
                   borderRadius: 2,
-                  py: 1.5,
-                  fontSize: "1rem",
+                  py: { xs: 1.25, sm: 1.5 },
+                  fontSize: { xs: "0.95rem", sm: "1rem" },
                   fontWeight: 600,
                   "&:hover": {
                     bgcolor: "rgba(0,0,0,1)",
@@ -347,12 +414,18 @@ const Signup = () => {
               <Box
                 sx={{
                   textAlign: "center",
-                  mt: 3,
-                  pt: 3,
+                  mt: { xs: 2.5, sm: 3 },
+                  pt: { xs: 2.5, sm: 3 },
                   borderTop: "1px solid rgba(0,0,0,0.1)",
                 }}
               >
-                <Typography variant="body2" sx={{ color: "rgba(0,0,0,0.6)" }}>
+                <Typography
+                  variant="body2"
+                  sx={{
+                    color: "rgba(0,0,0,0.6)",
+                    fontSize: { xs: "0.875rem", sm: "0.95rem" },
+                  }}
+                >
                   Already have an account?{" "}
                   <Link
                     to="/login"

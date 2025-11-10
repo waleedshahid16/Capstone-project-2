@@ -1,239 +1,115 @@
-import { useState } from "react";
+// src/components/Products.jsx
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { searchItem, setFilterCategory } from "../store/slices/searchSlice";
-import TextField from "@mui/material/TextField";
-import Select from "@mui/material/Select";
-import MenuItem from "@mui/material/MenuItem";
-import SearchIcon from "@mui/icons-material/Search";
-import FilterListIcon from "@mui/icons-material/FilterList";
-import InputAdornment from "@mui/material/InputAdornment";
-// import { products } from "../data/dummyData";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
-import { Box, Button, Card, Grid, Snackbar, Typography } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 import { addToCart } from "../store/slices/cartSlice";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Snackbar } from "@mui/material";
+import { searchItem, setFilterCategory } from "../store/slices/searchSlice";
 
-export default function ImgMediaCard() {
-  const { products: productsDummyData } = useSelector((state) => state.cart);
-  const { searchTerm, filterCategory } = useSelector((state) => state.search);
-  const [localFilterCategory, setLocalFilterCategory] = useState("all");
+export default function Products() {
+  const { products: productsDummyData } = useSelector((s) => s.cart);
+  const { searchTerm, filterCategory } = useSelector((s) => s.search);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [openSnackbar, setOpenSnackbar] = useState(false);
-  const [expandedProducts, setExpandedProducts] = useState(false);
-  const filteredProducts = productsDummyData.filter((prod) => {
-    const matchSearch = searchTerm
-      ? prod.name.toLowerCase().includes(searchTerm.toLowerCase())
-      : true;
-    const matchFilter =
-      filterCategory === "all" || prod.category === filterCategory;
 
-    return matchSearch && matchFilter;
-  });
+  const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [expandedProducts, setExpandedProducts] = useState({});
   const maxLength = 80;
 
-  const toggleReadMore = (productId) => {
-    setExpandedProducts((prev) => ({
-      ...prev,
-      [productId]: !prev[productId],
-    }));
-  };
+  const filteredProducts = productsDummyData.filter((p) => {
+    const matchSearch = searchTerm ? p.name.toLowerCase().includes(searchTerm.toLowerCase()) : true;
+    const matchFilter = filterCategory === "all" || p.category === filterCategory;
+    return matchSearch && matchFilter;
+  });
+
+  const toggleReadMore = (id) =>
+    setExpandedProducts((prev) => ({ ...prev, [id]: !prev[id] }));
 
   return (
-    <Box id="products-section" className="grow mx-32 ">
-      <Typography
-        variant="h4"
-        sx={{
-          fontWeight: "bold",
-          background: "black",
-          WebkitBackgroundClip: "text",
-          WebkitTextFillColor: "transparent",
-          backgroundClip: "text",
-          justifyContent: "center",
-          display: "flex",
-          margin: "20px",
-          fontSize: {
-            xs: "1.5rem",
-            sm: "1.75rem",
-            md: "2rem",
-            lg: "2.5rem",
-            xl: "3rem",
-          },
-        }}
-      >
+    <div id="products-section" className="w-full px-4 sm:px-6 lg:px-24 xl:px-48 py-6">
+      <h2 className="text-center font-bold bg-clip-text text-transparent bg-black mb-6 text-2xl md:text-3xl lg:text-4xl">
         All Products
-      </Typography>
-      <Box className="flex gap-4 mb-6 items-center">
-        <TextField
-          fullWidth
-          placeholder="Search products..."
-          variant="outlined"
-          onChange={(e) => dispatch(searchItem(e.target.value))}
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position="start">
-                <SearchIcon />
-              </InputAdornment>
-            ),
-          }}
-          sx={{
-            backgroundColor: "rgba(0,0,0,0.2)",
-            borderRadius: "8px",
-            "& .MuiOutlinedInput-root": {
-              "& fieldset": {
-                borderColor: "rgba(0,0,0,0.2)",
-              },
-              "&:hover fieldset": {
-                borderColor: "rgba(0,0,0,0.4)",
-              },
-            },
-          }}
-        />
+      </h2>
 
-        <Select
-          value={localFilterCategory}
-          onChange={(e) => {
-            setLocalFilterCategory(e.target.value);
-            dispatch(setFilterCategory(e.target.value));
-          }}
-          displayEmpty
-          startAdornment={<FilterListIcon sx={{ mr: 1 }} />}
-          sx={{
-            minWidth: "200px",
-            backgroundColor: "rgba(0,0,0,0.6)",
-            color: "white",
-            "& .MuiOutlinedInput-notchedOutline": { border: "none" },
-            "& .MuiSvgIcon-root": { color: "white" },
-            "&:hover": { backgroundColor: "rgba(0,0,0,0.7)" },
-            borderRadius: "8px 0 0 8px",
-          }}
+      {/* Optional: simple search and filter with Tailwind controls */}
+      <div className="flex flex-col md:flex-row items-center gap-4 mb-6">
+        <input
+          type="text"
+          placeholder="Search products..."
+          onChange={(e) => dispatch(searchItem(e.target.value))}
+          className="w-full md:flex-1 rounded-md border border-black/20 bg-black/5 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-black/40"
+        />
+        <select
+          onChange={(e) => dispatch(setFilterCategory(e.target.value))}
+          className="min-w-[180px] rounded-md bg-black/70 text-white px-3 py-2 focus:outline-none"
+          defaultValue={filterCategory}
         >
-          <MenuItem value="all">All</MenuItem>
-          <MenuItem value="audio">Audio Devices</MenuItem>
-          <MenuItem value="accessories">Accessories</MenuItem>
-          <MenuItem value="charging">Charging</MenuItem>
-        </Select>
-      </Box>
-      <Grid container spacing={2}>
-        {filteredProducts?.map((product, index) => {
+          <option value="all">All Categories</option>
+          <option value="audio">Audio Devices</option>
+          <option value="accessories">Accessories</option>
+          <option value="charging">Charging</option>
+        </select>
+      </div>
+
+      {/* Grid identical to homepage */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        {filteredProducts.map((product) => {
           const isExpanded = expandedProducts[product.id] || false;
           const description = product.description || "";
-          const displayText = isExpanded
-            ? description
-            : description.slice(0, maxLength);
-          const shouldShowButton = description.length > maxLength;
+          const displayText = isExpanded ? description : description.slice(0, maxLength);
+          const showBtn = description.length > maxLength;
 
           return (
-            <Grid
-              key={product.id}
-              size={3}
-              id={
-                index === 0 && searchTerm ? `product-${product.id}` : undefined
-              }
-              sx={{marginBottom: "2rem"}}
-            >
-              <Card
-                sx={{
-                  height: "100%",
-                  display: "flex",
-                  flexDirection: "column",
-                  p: 2.5,
-                  backgroundColor: "rgba(0,0,0,0.3)",
-                  borderRadius: "15px",
-                }}
-              >
-                <Box
-                  component="img"
-                  src={product.image}
-                  alt={product.name}
-                  onClick={() => {navigate(`/product/${product.id}`)}}
-                  sx={{
-                    width: "100%",
-                    height: "200px",
-                    objectFit: "contain",
-                    mb: 2,
-                  }}
-                  className="cursor-pointer"
-                />
-                <Typography variant="h5" sx={{ mb: 1 }}>
-                  {product.name}
-                </Typography>
-                <Typography
-                  variant="subtitle1"
-                  sx={{
-                    flexGrow: 1,
-                    mb: 1,
-                  }}
+            <div key={product.id} className="flex flex-col rounded-[15px] bg-black/30 p-5 hover:-translate-y-1 hover:shadow-lg transition-all">
+              <img
+                src={product.image}
+                alt={product.name}
+                onClick={() => navigate(`/product/${product.id}`)}
+                className="w-full h-[200px] object-contain mb-3 cursor-pointer transition-transform hover:scale-105"
+              />
+
+              <h3 className="font-semibold text-lg leading-snug line-clamp-2 mb-2">{product.name}</h3>
+
+              <p className="text-sm text-black/75 mb-3">
+                {displayText}
+                {showBtn && !isExpanded && "..."}
+              </p>
+
+              {showBtn && (
+                <button
+                  onClick={() => toggleReadMore(product.id)}
+                  className="text-sm font-semibold text-black/70 hover:text-black mb-3 text-left"
                 >
-                  {displayText}
-                  {shouldShowButton && !isExpanded && "..."}
-                </Typography>
+                  {isExpanded ? "Read Less" : "Read More"}
+                </button>
+              )}
 
-                {shouldShowButton && (
-                  <Button
-                    onClick={() => toggleReadMore(product.id)}
-                    sx={{
-                      textTransform: "none",
-                      color: "rgba(0,0,0,0.7)",
-                      fontSize: "0.875rem",
-                      fontWeight: 600,
-                      p: 0,
-                      minWidth: "auto",
-                      mb: 2,
-                      alignSelf: "flex-start",
-                      "&:hover": {
-                        backgroundColor: "transparent",
-                        color: "rgba(0,0,0,1)",
-                      },
-                    }}
-                  >
-                    {isExpanded ? "Read Less" : "Read More"}
-                  </Button>
-                )}
-
-                <Box className="flex justify-between" sx={{ mt: "auto" }}>
-                  <Typography variant="h6">RS {product.price}</Typography>
-                  <Snackbar
-                    open={openSnackbar}
-                    autoHideDuration={3000}
-                    onClose={() => setOpenSnackbar(false)}
-                    message="Item added to cart!"
-                  />
-                  <Button
-                    onClick={() => {
-                      dispatch(
-                        addToCart(
-                          productsDummyData.find((p) => p.id === product.id)
-                        )
-                      );
-                      setOpenSnackbar(true);
-                    }}
-                    sx={{
-                      borderRadius: "50px",
-                      border: "1px solid black",
-                      color: "black",
-                      textTransform: "none",
-                      transition: "0.3s",
-                      "&:hover": {
-                        backgroundColor: "rgba(0,0,0,0.3)",
-                        borderColor: "rgba(0,0,0,0.3)",
-                      },
-                    }}
-                  >
-                    <AddShoppingCartIcon
-                      sx={{
-                        mr: 1,
-                        color: "black",
-                      }}
-                    />
-                    Cart
-                  </Button>
-                </Box>
-              </Card>
-            </Grid>
+              <div className="mt-auto flex items-center justify-between gap-2">
+                <span className="font-bold text-lg text-black/90">RS {product.price}</span>
+                <button
+                  onClick={() => {
+                    dispatch(addToCart(productsDummyData.find((p) => p.id === product.id)));
+                    setOpenSnackbar(true);
+                  }}
+                  className="inline-flex items-center rounded-full border border-black px-4 py-2 text-sm font-semibold text-black transition-all hover:bg-black hover:text-white"
+                >
+                  <AddShoppingCartIcon className="mr-2" fontSize="small" />
+                  <span className="hidden sm:inline">Cart</span>
+                </button>
+              </div>
+            </div>
           );
         })}
-      </Grid>
-    </Box>
+      </div>
+
+      <Snackbar
+        open={openSnackbar}
+        autoHideDuration={3000}
+        onClose={() => setOpenSnackbar(false)}
+        message="Item added to cart!"
+        anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+      />
+    </div>
   );
 }

@@ -8,7 +8,6 @@ import {
   TextField,
   Button,
   Divider,
-  Paper,
   Alert,
   Snackbar,
   IconButton,
@@ -18,11 +17,7 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import {
-  ShoppingCart,
-  Payment,
-  Close,
-} from "@mui/icons-material";
+import { ShoppingCart, Payment, Close } from "@mui/icons-material";
 import { deleteFromCart } from "../store/slices/cartSlice";
 import BgImg from "../assets/BgImg.webp";
 
@@ -86,10 +81,10 @@ const Checkout = () => {
     cartList.forEach((item) => {
       dispatch(deleteFromCart(item));
     });
-    
+
     setOrderPlaced(true);
     setOpenSnackbar(true);
-    
+
     setTimeout(() => {
       navigate("/");
     }, 3000);
@@ -107,24 +102,55 @@ const Checkout = () => {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          py: 6,
+          py: { xs: 3, sm: 4, md: 5, lg: 6 },
+          px: { xs: 1.5, sm: 2, md: 2.5, lg: 3 },
         }}
       >
         <Container maxWidth="sm">
           <Card
             sx={{
-              p: 4,
+              p: { xs: 2.5, sm: 3, md: 3.5, lg: 4 },
               textAlign: "center",
               backgroundColor: "rgba(255,255,255,0.8)",
-              borderRadius: 3,
+              borderRadius: { xs: 1.5, sm: 2, md: 2.5, lg: 3 },
               boxShadow: 2,
             }}
           >
-            <ShoppingCart sx={{ fontSize: 64, color: "rgba(0,0,0,0.5)", mb: 2 }} />
-            <Typography variant="h5" sx={{ fontWeight: 600, mb: 2 }}>
+            <ShoppingCart
+              sx={{
+                fontSize: { xs: 40, sm: 48, md: 56, lg: 64 },
+                color: "rgba(0,0,0,0.5)",
+                mb: { xs: 1.25, sm: 1.5, md: 1.75, lg: 2 },
+              }}
+            />
+            <Typography
+              variant="h5"
+              sx={{
+                fontWeight: 600,
+                mb: { xs: 1.25, sm: 1.5, md: 1.75, lg: 2 },
+                fontSize: {
+                  xs: "1.1rem",
+                  sm: "1.25rem",
+                  md: "1.4rem",
+                  lg: "1.5rem",
+                },
+              }}
+            >
               Your cart is empty
             </Typography>
-            <Typography variant="body1" sx={{ color: "rgba(0,0,0,0.7)", mb: 3 }}>
+            <Typography
+              variant="body1"
+              sx={{
+                color: "rgba(0,0,0,0.7)",
+                mb: { xs: 2, sm: 2.5, md: 2.75, lg: 3 },
+                fontSize: {
+                  xs: "0.85rem",
+                  sm: "0.95rem",
+                  md: "1rem",
+                  lg: "1rem",
+                },
+              }}
+            >
               Please add items to your cart before proceeding to checkout.
             </Typography>
             <Button
@@ -133,8 +159,14 @@ const Checkout = () => {
               sx={{
                 bgcolor: "rgba(0,0,0,0.8)",
                 color: "white",
-                px: 4,
-                py: 1.5,
+                px: { xs: 2.5, sm: 3, md: 3.5, lg: 4 },
+                py: { xs: 1, sm: 1.25, md: 1.4, lg: 1.5 },
+                fontSize: {
+                  xs: "0.85rem",
+                  sm: "0.95rem",
+                  md: "1rem",
+                  lg: "1rem",
+                },
                 "&:hover": {
                   bgcolor: "rgba(0,0,0,1)",
                 },
@@ -156,26 +188,58 @@ const Checkout = () => {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          py: 6,
+          py: { xs: 3, sm: 4, md: 5, lg: 6 },
+          px: { xs: 1.5, sm: 2, md: 2.5, lg: 3 },
         }}
       >
         <Container maxWidth="sm">
           <Card
             sx={{
-              p: 4,
+              p: { xs: 2.5, sm: 3, md: 3.5, lg: 4 },
               textAlign: "center",
               backgroundColor: "rgba(255,255,255,0.8)",
-              borderRadius: 3,
+              borderRadius: { xs: 1.5, sm: 2, md: 2.5, lg: 3 },
               boxShadow: 2,
             }}
           >
-            <Payment sx={{ fontSize: 64, color: "#4caf50", mb: 2 }} />
-            <Typography variant="h4" sx={{ fontWeight: 700, mb: 2, color: "#4caf50" }}>
+            <Payment
+              sx={{
+                fontSize: { xs: 40, sm: 48, md: 56, lg: 64 },
+                color: "#4caf50",
+                mb: { xs: 1.25, sm: 1.5, md: 1.75, lg: 2 },
+              }}
+            />
+            <Typography
+              variant="h4"
+              sx={{
+                fontWeight: 700,
+                mb: { xs: 1.25, sm: 1.5, md: 1.75, lg: 2 },
+                color: "#4caf50",
+                fontSize: {
+                  xs: "1.35rem",
+                  sm: "1.5rem",
+                  md: "1.85rem",
+                  lg: "2.125rem",
+                },
+              }}
+            >
               Order Placed Successfully!
             </Typography>
-            <Typography variant="body1" sx={{ color: "rgba(0,0,0,0.7)", mb: 3 }}>
-              Thank you for your order. You will receive a confirmation email shortly.
-              Redirecting to home page...
+            <Typography
+              variant="body1"
+              sx={{
+                color: "rgba(0,0,0,0.7)",
+                mb: { xs: 2, sm: 2.5, md: 2.75, lg: 3 },
+                fontSize: {
+                  xs: "0.85rem",
+                  sm: "0.95rem",
+                  md: "1rem",
+                  lg: "1rem",
+                },
+              }}
+            >
+              Thank you for your order. You will receive a confirmation email
+              shortly. Redirecting to home page...
             </Typography>
           </Card>
         </Container>
@@ -210,28 +274,34 @@ const Checkout = () => {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          p: { xs: 2, sm: 3 },
+          p: { xs: 1.5, sm: 2, md: 3, lg: 4 },
+          py: { xs: 2.5, sm: 3, md: 4, lg: 5 },
         }}
       >
         <Container maxWidth="lg" sx={{ width: "100%" }}>
           <form onSubmit={handleSubmit(handleCheckout)}>
-            <Grid container spacing={4} justifyContent="center">
+            <Grid
+              container
+              spacing={{ xs: 2.5, sm: 3, md: 3.5, lg: 4 }}
+              justifyContent="center"
+            >
+              {/* Left Column - Checkout Form */}
               <Grid item xs={12} md={8}>
                 <Card
                   elevation={8}
                   sx={{
-                    borderRadius: 3,
+                    borderRadius: { xs: 1.5, sm: 2, md: 2.5, lg: 3 },
                     backgroundColor: "rgba(255,255,255,0.95)",
                     backdropFilter: "blur(10px)",
-                    mb: { xs: 3, md: 0 },
+                    mb: { xs: 2.5, sm: 3, md: 0 },
                   }}
                 >
                   <Box
                     sx={{
                       background:
                         "linear-gradient(135deg, rgba(0,0,0,0.9) 0%, rgba(60,60,60,0.9) 100%)",
-                      py: { xs: 4, sm: 5 },
-                      px: { xs: 3, sm: 4 },
+                      py: { xs: 2.5, sm: 3, md: 4, lg: 5 },
+                      px: { xs: 1.5, sm: 2, md: 3, lg: 4 },
                       textAlign: "center",
                     }}
                   >
@@ -240,9 +310,19 @@ const Checkout = () => {
                       sx={{
                         color: "white",
                         fontWeight: 700,
-                        mb: 1,
-                        letterSpacing: ".2rem",
-                        fontSize: { xs: "1.5rem", sm: "2rem" },
+                        mb: { xs: 0.5, sm: 0.75, md: 0.85, lg: 1 },
+                        letterSpacing: {
+                          xs: ".1rem",
+                          sm: ".15rem",
+                          md: ".18rem",
+                          lg: ".2rem",
+                        },
+                        fontSize: {
+                          xs: "1.35rem",
+                          sm: "1.5rem",
+                          md: "1.75rem",
+                          lg: "2rem",
+                        },
                       }}
                     >
                       Digitronix
@@ -251,18 +331,36 @@ const Checkout = () => {
                       variant="body2"
                       sx={{
                         color: "rgba(255,255,255,0.8)",
-                        fontSize: { xs: "0.8rem", sm: "0.875rem" },
+                        fontSize: {
+                          xs: "0.75rem",
+                          sm: "0.8rem",
+                          md: "0.85rem",
+                          lg: "0.875rem",
+                        },
                       }}
                     >
                       Complete your order. We're almost there!
                     </Typography>
                   </Box>
-                  <Box sx={{ p: { xs: 3, sm: 4 } }}>
-                    <Grid container spacing={3}>
+                  <Box sx={{ p: { xs: 1.5, sm: 2, md: 3, lg: 4 } }}>
+                    <Grid
+                      container
+                      spacing={{ xs: 1.75, sm: 2, md: 2.5, lg: 3 }}
+                    >
                       <Grid item xs={12}>
                         <Typography
                           variant="body2"
-                          sx={{ mb: 1, fontWeight: 600, color: "rgba(0,0,0,0.8)" }}
+                          sx={{
+                            mb: { xs: 0.75, sm: 0.85, md: 0.9, lg: 1 },
+                            fontWeight: 600,
+                            color: "rgba(0,0,0,0.8)",
+                            fontSize: {
+                              xs: "0.8rem",
+                              sm: "0.875rem",
+                              md: "0.9rem",
+                              lg: "0.95rem",
+                            },
+                          }}
                         >
                           Full Name
                         </Typography>
@@ -277,14 +375,28 @@ const Checkout = () => {
                               error={!!errors?.fullName}
                               sx={{
                                 "& .MuiOutlinedInput-root": {
-                                  borderRadius: 2,
+                                  borderRadius: {
+                                    xs: 1.5,
+                                    sm: 1.75,
+                                    md: 1.85,
+                                    lg: 2,
+                                  },
                                   backgroundColor: "rgba(0,0,0,0.03)",
+                                  fontSize: {
+                                    xs: "0.8rem",
+                                    sm: "0.875rem",
+                                    md: "0.95rem",
+                                    lg: "1rem",
+                                  },
                                   "&:hover fieldset": {
                                     borderColor: "rgba(0,0,0,0.6)",
                                   },
                                   "&.Mui-focused fieldset": {
                                     borderColor: "rgba(0,0,0,0.8)",
                                   },
+                                },
+                                "& input": {
+                                  py: { xs: 1, sm: 1.15, md: 1.3, lg: 1.5 },
                                 },
                               }}
                             />
@@ -293,7 +405,17 @@ const Checkout = () => {
                         {errors?.fullName && (
                           <Typography
                             variant="caption"
-                            sx={{ color: "error.main", mt: 0.5, display: "block" }}
+                            sx={{
+                              color: "error.main",
+                              mt: 0.5,
+                              display: "block",
+                              fontSize: {
+                                xs: "0.65rem",
+                                sm: "0.7rem",
+                                md: "0.72rem",
+                                lg: "0.75rem",
+                              },
+                            }}
                           >
                             {errors.fullName.message}
                           </Typography>
@@ -303,7 +425,17 @@ const Checkout = () => {
                       <Grid item xs={12} sm={6}>
                         <Typography
                           variant="body2"
-                          sx={{ mb: 1, fontWeight: 600, color: "rgba(0,0,0,0.8)" }}
+                          sx={{
+                            mb: { xs: 0.75, sm: 0.85, md: 0.9, lg: 1 },
+                            fontWeight: 600,
+                            color: "rgba(0,0,0,0.8)",
+                            fontSize: {
+                              xs: "0.8rem",
+                              sm: "0.875rem",
+                              md: "0.9rem",
+                              lg: "0.95rem",
+                            },
+                          }}
                         >
                           Email Address
                         </Typography>
@@ -319,14 +451,28 @@ const Checkout = () => {
                               error={!!errors?.email}
                               sx={{
                                 "& .MuiOutlinedInput-root": {
-                                  borderRadius: 2,
+                                  borderRadius: {
+                                    xs: 1.5,
+                                    sm: 1.75,
+                                    md: 1.85,
+                                    lg: 2,
+                                  },
                                   backgroundColor: "rgba(0,0,0,0.03)",
+                                  fontSize: {
+                                    xs: "0.8rem",
+                                    sm: "0.875rem",
+                                    md: "0.95rem",
+                                    lg: "1rem",
+                                  },
                                   "&:hover fieldset": {
                                     borderColor: "rgba(0,0,0,0.6)",
                                   },
                                   "&.Mui-focused fieldset": {
                                     borderColor: "rgba(0,0,0,0.8)",
                                   },
+                                },
+                                "& input": {
+                                  py: { xs: 1, sm: 1.15, md: 1.3, lg: 1.5 },
                                 },
                               }}
                             />
@@ -335,7 +481,17 @@ const Checkout = () => {
                         {errors?.email && (
                           <Typography
                             variant="caption"
-                            sx={{ color: "error.main", mt: 0.5, display: "block" }}
+                            sx={{
+                              color: "error.main",
+                              mt: 0.5,
+                              display: "block",
+                              fontSize: {
+                                xs: "0.65rem",
+                                sm: "0.7rem",
+                                md: "0.72rem",
+                                lg: "0.75rem",
+                              },
+                            }}
                           >
                             {errors.email.message}
                           </Typography>
@@ -345,7 +501,17 @@ const Checkout = () => {
                       <Grid item xs={12} sm={6}>
                         <Typography
                           variant="body2"
-                          sx={{ mb: 1, fontWeight: 600, color: "rgba(0,0,0,0.8)" }}
+                          sx={{
+                            mb: { xs: 0.75, sm: 0.85, md: 0.9, lg: 1 },
+                            fontWeight: 600,
+                            color: "rgba(0,0,0,0.8)",
+                            fontSize: {
+                              xs: "0.8rem",
+                              sm: "0.875rem",
+                              md: "0.9rem",
+                              lg: "0.95rem",
+                            },
+                          }}
                         >
                           Phone Number
                         </Typography>
@@ -360,14 +526,28 @@ const Checkout = () => {
                               error={!!errors?.phone}
                               sx={{
                                 "& .MuiOutlinedInput-root": {
-                                  borderRadius: 2,
+                                  borderRadius: {
+                                    xs: 1.5,
+                                    sm: 1.75,
+                                    md: 1.85,
+                                    lg: 2,
+                                  },
                                   backgroundColor: "rgba(0,0,0,0.03)",
+                                  fontSize: {
+                                    xs: "0.8rem",
+                                    sm: "0.875rem",
+                                    md: "0.95rem",
+                                    lg: "1rem",
+                                  },
                                   "&:hover fieldset": {
                                     borderColor: "rgba(0,0,0,0.6)",
                                   },
                                   "&.Mui-focused fieldset": {
                                     borderColor: "rgba(0,0,0,0.8)",
                                   },
+                                },
+                                "& input": {
+                                  py: { xs: 1, sm: 1.15, md: 1.3, lg: 1.5 },
                                 },
                               }}
                             />
@@ -376,7 +556,17 @@ const Checkout = () => {
                         {errors?.phone && (
                           <Typography
                             variant="caption"
-                            sx={{ color: "error.main", mt: 0.5, display: "block" }}
+                            sx={{
+                              color: "error.main",
+                              mt: 0.5,
+                              display: "block",
+                              fontSize: {
+                                xs: "0.65rem",
+                                sm: "0.7rem",
+                                md: "0.72rem",
+                                lg: "0.75rem",
+                              },
+                            }}
                           >
                             {errors.phone.message}
                           </Typography>
@@ -386,7 +576,17 @@ const Checkout = () => {
                       <Grid item xs={12}>
                         <Typography
                           variant="body2"
-                          sx={{ mb: 1, fontWeight: 600, color: "rgba(0,0,0,0.8)" }}
+                          sx={{
+                            mb: { xs: 0.75, sm: 0.85, md: 0.9, lg: 1 },
+                            fontWeight: 600,
+                            color: "rgba(0,0,0,0.8)",
+                            fontSize: {
+                              xs: "0.8rem",
+                              sm: "0.875rem",
+                              md: "0.9rem",
+                              lg: "0.95rem",
+                            },
+                          }}
                         >
                           Address
                         </Typography>
@@ -403,8 +603,19 @@ const Checkout = () => {
                               error={!!errors?.address}
                               sx={{
                                 "& .MuiOutlinedInput-root": {
-                                  borderRadius: 2,
+                                  borderRadius: {
+                                    xs: 1.5,
+                                    sm: 1.75,
+                                    md: 1.85,
+                                    lg: 2,
+                                  },
                                   backgroundColor: "rgba(0,0,0,0.03)",
+                                  fontSize: {
+                                    xs: "0.8rem",
+                                    sm: "0.875rem",
+                                    md: "0.95rem",
+                                    lg: "1rem",
+                                  },
                                   "&:hover fieldset": {
                                     borderColor: "rgba(0,0,0,0.6)",
                                   },
@@ -419,7 +630,17 @@ const Checkout = () => {
                         {errors?.address && (
                           <Typography
                             variant="caption"
-                            sx={{ color: "error.main", mt: 0.5, display: "block" }}
+                            sx={{
+                              color: "error.main",
+                              mt: 0.5,
+                              display: "block",
+                              fontSize: {
+                                xs: "0.65rem",
+                                sm: "0.7rem",
+                                md: "0.72rem",
+                                lg: "0.75rem",
+                              },
+                            }}
                           >
                             {errors.address.message}
                           </Typography>
@@ -429,7 +650,17 @@ const Checkout = () => {
                       <Grid item xs={12} sm={6}>
                         <Typography
                           variant="body2"
-                          sx={{ mb: 1, fontWeight: 600, color: "rgba(0,0,0,0.8)" }}
+                          sx={{
+                            mb: { xs: 0.75, sm: 0.85, md: 0.9, lg: 1 },
+                            fontWeight: 600,
+                            color: "rgba(0,0,0,0.8)",
+                            fontSize: {
+                              xs: "0.8rem",
+                              sm: "0.875rem",
+                              md: "0.9rem",
+                              lg: "0.95rem",
+                            },
+                          }}
                         >
                           City
                         </Typography>
@@ -444,14 +675,28 @@ const Checkout = () => {
                               error={!!errors?.city}
                               sx={{
                                 "& .MuiOutlinedInput-root": {
-                                  borderRadius: 2,
+                                  borderRadius: {
+                                    xs: 1.5,
+                                    sm: 1.75,
+                                    md: 1.85,
+                                    lg: 2,
+                                  },
                                   backgroundColor: "rgba(0,0,0,0.03)",
+                                  fontSize: {
+                                    xs: "0.8rem",
+                                    sm: "0.875rem",
+                                    md: "0.95rem",
+                                    lg: "1rem",
+                                  },
                                   "&:hover fieldset": {
                                     borderColor: "rgba(0,0,0,0.6)",
                                   },
                                   "&.Mui-focused fieldset": {
                                     borderColor: "rgba(0,0,0,0.8)",
                                   },
+                                },
+                                "& input": {
+                                  py: { xs: 1, sm: 1.15, md: 1.3, lg: 1.5 },
                                 },
                               }}
                             />
@@ -460,7 +705,17 @@ const Checkout = () => {
                         {errors?.city && (
                           <Typography
                             variant="caption"
-                            sx={{ color: "error.main", mt: 0.5, display: "block" }}
+                            sx={{
+                              color: "error.main",
+                              mt: 0.5,
+                              display: "block",
+                              fontSize: {
+                                xs: "0.65rem",
+                                sm: "0.7rem",
+                                md: "0.72rem",
+                                lg: "0.75rem",
+                              },
+                            }}
                           >
                             {errors.city.message}
                           </Typography>
@@ -470,7 +725,17 @@ const Checkout = () => {
                       <Grid item xs={12} sm={6}>
                         <Typography
                           variant="body2"
-                          sx={{ mb: 1, fontWeight: 600, color: "rgba(0,0,0,0.8)" }}
+                          sx={{
+                            mb: { xs: 0.75, sm: 0.85, md: 0.9, lg: 1 },
+                            fontWeight: 600,
+                            color: "rgba(0,0,0,0.8)",
+                            fontSize: {
+                              xs: "0.8rem",
+                              sm: "0.875rem",
+                              md: "0.9rem",
+                              lg: "0.95rem",
+                            },
+                          }}
                         >
                           Postal Code
                         </Typography>
@@ -485,14 +750,28 @@ const Checkout = () => {
                               error={!!errors?.postalCode}
                               sx={{
                                 "& .MuiOutlinedInput-root": {
-                                  borderRadius: 2,
+                                  borderRadius: {
+                                    xs: 1.5,
+                                    sm: 1.75,
+                                    md: 1.85,
+                                    lg: 2,
+                                  },
                                   backgroundColor: "rgba(0,0,0,0.03)",
+                                  fontSize: {
+                                    xs: "0.8rem",
+                                    sm: "0.875rem",
+                                    md: "0.95rem",
+                                    lg: "1rem",
+                                  },
                                   "&:hover fieldset": {
                                     borderColor: "rgba(0,0,0,0.6)",
                                   },
                                   "&.Mui-focused fieldset": {
                                     borderColor: "rgba(0,0,0,0.8)",
                                   },
+                                },
+                                "& input": {
+                                  py: { xs: 1, sm: 1.15, md: 1.3, lg: 1.5 },
                                 },
                               }}
                             />
@@ -501,7 +780,17 @@ const Checkout = () => {
                         {errors?.postalCode && (
                           <Typography
                             variant="caption"
-                            sx={{ color: "error.main", mt: 0.5, display: "block" }}
+                            sx={{
+                              color: "error.main",
+                              mt: 0.5,
+                              display: "block",
+                              fontSize: {
+                                xs: "0.65rem",
+                                sm: "0.7rem",
+                                md: "0.72rem",
+                                lg: "0.75rem",
+                              },
+                            }}
                           >
                             {errors.postalCode.message}
                           </Typography>
@@ -511,7 +800,17 @@ const Checkout = () => {
                       <Grid item xs={12}>
                         <Typography
                           variant="body2"
-                          sx={{ mb: 1, fontWeight: 600, color: "rgba(0,0,0,0.8)" }}
+                          sx={{
+                            mb: { xs: 0.75, sm: 0.85, md: 0.9, lg: 1 },
+                            fontWeight: 600,
+                            color: "rgba(0,0,0,0.8)",
+                            fontSize: {
+                              xs: "0.8rem",
+                              sm: "0.875rem",
+                              md: "0.9rem",
+                              lg: "0.95rem",
+                            },
+                          }}
                         >
                           Payment Method
                         </Typography>
@@ -529,14 +828,28 @@ const Checkout = () => {
                               }}
                               sx={{
                                 "& .MuiOutlinedInput-root": {
-                                  borderRadius: 2,
+                                  borderRadius: {
+                                    xs: 1.5,
+                                    sm: 1.75,
+                                    md: 1.85,
+                                    lg: 2,
+                                  },
                                   backgroundColor: "rgba(0,0,0,0.03)",
+                                  fontSize: {
+                                    xs: "0.8rem",
+                                    sm: "0.875rem",
+                                    md: "0.95rem",
+                                    lg: "1rem",
+                                  },
                                   "&:hover fieldset": {
                                     borderColor: "rgba(0,0,0,0.6)",
                                   },
                                   "&.Mui-focused fieldset": {
                                     borderColor: "rgba(0,0,0,0.8)",
                                   },
+                                },
+                                "& select": {
+                                  py: { xs: 1, sm: 1.15, md: 1.3, lg: 1.5 },
                                 },
                               }}
                             >
@@ -550,7 +863,17 @@ const Checkout = () => {
                         {errors?.paymentMethod && (
                           <Typography
                             variant="caption"
-                            sx={{ color: "error.main", mt: 0.5, display: "block" }}
+                            sx={{
+                              color: "error.main",
+                              mt: 0.5,
+                              display: "block",
+                              fontSize: {
+                                xs: "0.65rem",
+                                sm: "0.7rem",
+                                md: "0.72rem",
+                                lg: "0.75rem",
+                              },
+                            }}
                           >
                             {errors.paymentMethod.message}
                           </Typography>
@@ -566,173 +889,315 @@ const Checkout = () => {
                 <Card
                   elevation={8}
                   sx={{
-                    borderRadius: 3,
+                    borderRadius: { xs: 1.5, sm: 2, md: 2.5, lg: 3 },
                     backgroundColor: "rgba(255,255,255,0.95)",
                     backdropFilter: "blur(10px)",
-                    position: "sticky",
+                    position: { md: "sticky" },
                     top: 20,
                     height: "fit-content",
                   }}
                 >
-                  <Box sx={{ p: { xs: 3, sm: 4 } }}>
-                    <Box sx={{ display: "flex", alignItems: "center", gap: 2, mb: 3 }}>
-                      <ShoppingCart sx={{ fontSize: 32, color: "rgba(0,0,0,0.8)" }} />
-                      <Typography variant="h5" sx={{ fontWeight: 600 }}>
+                  <Box sx={{ p: { xs: 1.5, sm: 2, md: 3, lg: 4 } }}>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: { xs: 1.25, sm: 1.5, md: 1.75, lg: 2 },
+                        mb: { xs: 2, sm: 2.5, md: 2.75, lg: 3 },
+                      }}
+                    >
+                      <ShoppingCart
+                        sx={{
+                          fontSize: { xs: 24, sm: 28, md: 30, lg: 32 },
+                          color: "rgba(0,0,0,0.8)",
+                        }}
+                      />
+                      <Typography
+                        variant="h5"
+                        sx={{
+                          fontWeight: 600,
+                          fontSize: {
+                            xs: "1rem",
+                            sm: "1.15rem",
+                            md: "1.3rem",
+                            lg: "1.5rem",
+                          },
+                        }}
+                      >
                         Order Summary
                       </Typography>
                     </Box>
 
-              <Grid container spacing={2} sx={{ mb: 3 }}>
-                {cartList.map((item) => (
-                  <Grid item xs={6} sm={4} md={3} key={item.id}>
-                    <Box
-                      sx={{
-                        display: "flex",
-                        flexDirection: "column",
-                        p: 2,
-                        borderRadius: 2,
-                        backgroundColor: "rgba(0,0,0,0.02)",
-                        border: "1px solid rgba(0,0,0,0.1)",
-                        height: "100%",
-                        position: "relative",
-                      }}
+                    <Grid
+                      container
+                      spacing={{ xs: 1.25, sm: 1.5, md: 1.75, lg: 2 }}
+                      sx={{ mb: { xs: 2, sm: 2.5, md: 2.75, lg: 3 } }}
                     >
-                      {/* Delete Button */}
-                      <IconButton
-                        onClick={() => dispatch(deleteFromCart(item))}
-                        sx={{
-                          position: "absolute",
-                          top: 6,
-                          right: 6,
-                          backgroundColor: "rgba(255, 255, 255, 0.95)",
-                          color: "rgba(0, 0, 0, 0.8)",
-                          width: 32,
-                          height: 32,
-                          zIndex: 1,
-                          boxShadow: "0 2px 8px rgba(0, 0, 0, 0.15)",
-                          border: "1px solid rgba(0, 0, 0, 0.1)",
-                          "&:hover": {
-                            backgroundColor: "rgba(0, 0, 0, 0.9)",
-                            color: "white",
-                            transform: "scale(1.1) rotate(90deg)",
-                            boxShadow: "0 4px 12px rgba(0, 0, 0, 0.25)",
-                          },
-                          transition: "all 0.3s ease",
-                        }}
-                        aria-label="Remove item"
-                      >
-                        <Close sx={{ fontSize: 20, fontWeight: 600 }} />
-                      </IconButton>
-                      {/* Image */}
+                      {cartList.map((item) => (
+                        <Grid item xs={6} sm={4} md={6} key={item.id}>
+                          <Box
+                            sx={{
+                              display: "flex",
+                              flexDirection: "column",
+                              p: { xs: 1.25, sm: 1.5, md: 1.75, lg: 2 },
+                              borderRadius: {
+                                xs: 1.5,
+                                sm: 1.75,
+                                md: 1.85,
+                                lg: 2,
+                              },
+                              backgroundColor: "rgba(0,0,0,0.02)",
+                              border: "1px solid rgba(0,0,0,0.1)",
+                              height: "100%",
+                              position: "relative",
+                            }}
+                          >
+                            {/* Delete Button */}
+                            <IconButton
+                              onClick={() => dispatch(deleteFromCart(item))}
+                              sx={{
+                                position: "absolute",
+                                top: { xs: 3, sm: 4, md: 5, lg: 6 },
+                                right: { xs: 3, sm: 4, md: 5, lg: 6 },
+                                backgroundColor: "rgba(255, 255, 255, 0.95)",
+                                color: "rgba(0, 0, 0, 0.8)",
+                                width: { xs: 24, sm: 28, md: 30, lg: 32 },
+                                height: { xs: 24, sm: 28, md: 30, lg: 32 },
+                                zIndex: 1,
+                                boxShadow: "0 2px 8px rgba(0, 0, 0, 0.15)",
+                                border: "1px solid rgba(0, 0, 0, 0.1)",
+                                "&:hover": {
+                                  backgroundColor: "rgba(0, 0, 0, 0.9)",
+                                  color: "white",
+                                  transform: "scale(1.1) rotate(90deg)",
+                                  boxShadow: "0 4px 12px rgba(0, 0, 0, 0.25)",
+                                },
+                                transition: "all 0.3s ease",
+                              }}
+                              aria-label="Remove item"
+                            >
+                              <Close
+                                sx={{
+                                  fontSize: { xs: 14, sm: 16, md: 18, lg: 20 },
+                                  fontWeight: 600,
+                                }}
+                              />
+                            </IconButton>
+                            {/* Image */}
+                            <Box
+                              sx={{
+                                width: "100%",
+                                height: { xs: 85, sm: 100, md: 110, lg: 120 },
+                                borderRadius: {
+                                  xs: 1.5,
+                                  sm: 1.75,
+                                  md: 1.85,
+                                  lg: 2,
+                                },
+                                overflow: "hidden",
+                                backgroundColor: "#f5f5f5",
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "center",
+                                p: { xs: 0.75, sm: 0.85, md: 0.9, lg: 1 },
+                                mb: { xs: 0.85, sm: 1, md: 1.25, lg: 1.5 },
+                              }}
+                            >
+                              <img
+                                src={item.image}
+                                alt={item.name}
+                                style={{
+                                  width: "100%",
+                                  height: "100%",
+                                  objectFit: "contain",
+                                }}
+                              />
+                            </Box>
+                            {/* Details */}
+                            <Box
+                              sx={{
+                                display: "flex",
+                                flexDirection: "column",
+                                gap: { xs: 0.4, sm: 0.45, md: 0.48, lg: 0.5 },
+                                flex: 1,
+                              }}
+                            >
+                              <Typography
+                                variant="body2"
+                                sx={{
+                                  fontWeight: 600,
+                                  color: "rgba(0,0,0,0.9)",
+                                  mb: { xs: 0.4, sm: 0.45, md: 0.48, lg: 0.5 },
+                                  overflow: "hidden",
+                                  textOverflow: "ellipsis",
+                                  display: "-webkit-box",
+                                  WebkitLineClamp: 2,
+                                  WebkitBoxOrient: "vertical",
+                                  fontSize: {
+                                    xs: "0.8rem",
+                                    sm: "0.875rem",
+                                    md: "0.9rem",
+                                    lg: "0.95rem",
+                                  },
+                                }}
+                              >
+                                {item.name}
+                              </Typography>
+                              <Typography
+                                variant="caption"
+                                sx={{
+                                  color: "rgba(0,0,0,0.6)",
+                                  fontSize: {
+                                    xs: "0.65rem",
+                                    sm: "0.7rem",
+                                    md: "0.72rem",
+                                    lg: "0.75rem",
+                                  },
+                                }}
+                              >
+                                Qty: {item.quantity} × RS {item.price}
+                              </Typography>
+                              <Typography
+                                variant="body1"
+                                sx={{
+                                  fontWeight: 700,
+                                  color: "rgba(0,0,0,0.9)",
+                                  mt: { xs: 0.4, sm: 0.45, md: 0.48, lg: 0.5 },
+                                  fontSize: {
+                                    xs: "0.85rem",
+                                    sm: "0.95rem",
+                                    md: "0.98rem",
+                                    lg: "1rem",
+                                  },
+                                }}
+                              >
+                                RS {(item.price * item.quantity).toFixed(2)}
+                              </Typography>
+                            </Box>
+                          </Box>
+                        </Grid>
+                      ))}
+                    </Grid>
+
+                    <Divider
+                      sx={{ my: { xs: 1.25, sm: 1.5, md: 1.75, lg: 2 } }}
+                    />
+
+                    <Box sx={{ mb: { xs: 1.25, sm: 1.5, md: 1.75, lg: 2 } }}>
                       <Box
                         sx={{
-                          width: "100%",
-                          height: 120,
-                          borderRadius: 2,
-                          overflow: "hidden",
-                          backgroundColor: "#f5f5f5",
                           display: "flex",
-                          alignItems: "center",
-                          justifyContent: "center",
-                          p: 1,
-                          mb: 1.5,
+                          justifyContent: "space-between",
+                          mb: { xs: 0.65, sm: 0.75, md: 0.85, lg: 1 },
                         }}
                       >
-                        <img
-                          src={item.image}
-                          alt={item.name}
-                          style={{
-                            width: "100%",
-                            height: "100%",
-                            objectFit: "contain",
+                        <Typography
+                          variant="body2"
+                          sx={{
+                            color: "rgba(0,0,0,0.7)",
+                            fontSize: {
+                              xs: "0.8rem",
+                              sm: "0.875rem",
+                              md: "0.9rem",
+                              lg: "0.95rem",
+                            },
                           }}
-                        />
+                        >
+                          Subtotal ({totalItems} items)
+                        </Typography>
+                        <Typography
+                          variant="body2"
+                          sx={{
+                            fontWeight: 600,
+                            fontSize: {
+                              xs: "0.8rem",
+                              sm: "0.875rem",
+                              md: "0.9rem",
+                              lg: "0.95rem",
+                            },
+                          }}
+                        >
+                          RS {totalPrice}
+                        </Typography>
                       </Box>
-                      {/* Details */}
-                      <Box sx={{ display: "flex", flexDirection: "column", gap: 0.5, flex: 1 }}>
-                        <Typography 
-                          variant="body2" 
-                          sx={{ 
-                            fontWeight: 600, 
-                            color: "rgba(0,0,0,0.9)",
-                            mb: 0.5,
-                            overflow: "hidden",
-                            textOverflow: "ellipsis",
-                            display: "-webkit-box",
-                            WebkitLineClamp: 2,
-                            WebkitBoxOrient: "vertical",
+                      <Box
+                        sx={{
+                          display: "flex",
+                          justifyContent: "space-between",
+                          mb: { xs: 0.65, sm: 0.75, md: 0.85, lg: 1 },
+                        }}
+                      >
+                        <Typography
+                          variant="body2"
+                          sx={{
+                            color: "rgba(0,0,0,0.7)",
+                            fontSize: {
+                              xs: "0.8rem",
+                              sm: "0.875rem",
+                              md: "0.9rem",
+                              lg: "0.95rem",
+                            },
                           }}
                         >
-                          {item.name}
+                          Shipping
                         </Typography>
-                        <Typography variant="caption" sx={{ color: "rgba(0,0,0,0.6)" }}>
-                          Qty: {item.quantity} × RS {item.price}
-                        </Typography>
-                        <Typography 
-                          variant="body1" 
-                          sx={{ 
-                            fontWeight: 700, 
-                            color: "rgba(0,0,0,0.9)",
-                            mt: 0.5,
+                        <Typography
+                          variant="body2"
+                          sx={{
+                            fontWeight: 600,
+                            fontSize: {
+                              xs: "0.8rem",
+                              sm: "0.875rem",
+                              md: "0.9rem",
+                              lg: "0.95rem",
+                            },
                           }}
                         >
-                          RS {(item.price * item.quantity).toFixed(2)}
+                          {shippingFee === 0 ? "Free" : `RS ${shippingFee}`}
                         </Typography>
                       </Box>
                     </Box>
-                  </Grid>
-                ))}
-              </Grid>
 
-              <Divider sx={{ my: 2 }} />
+                    <Divider
+                      sx={{ my: { xs: 1.25, sm: 1.5, md: 1.75, lg: 2 } }}
+                    />
 
-              <Box sx={{ mb: 2 }}>
-                <Box
-                  sx={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    mb: 1,
-                  }}
-                >
-                  <Typography variant="body2" sx={{ color: "rgba(0,0,0,0.7)" }}>
-                    Subtotal ({totalItems} items)
-                  </Typography>
-                  <Typography variant="body2" sx={{ fontWeight: 600 }}>
-                    RS {totalPrice}
-                  </Typography>
-                </Box>
-                <Box
-                  sx={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    mb: 1,
-                  }}
-                >
-                  <Typography variant="body2" sx={{ color: "rgba(0,0,0,0.7)" }}>
-                    Shipping
-                  </Typography>
-                  <Typography variant="body2" sx={{ fontWeight: 600 }}>
-                    {shippingFee === 0 ? "Free" : `RS ${shippingFee}`}
-                  </Typography>
-                </Box>
-              </Box>
-
-              <Divider sx={{ my: 2 }} />
-
-              <Box
-                sx={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  mb: 3,
-                }}
-              >
-                <Typography variant="h6" sx={{ fontWeight: 700 }}>
-                  Total
-                </Typography>
-                <Typography variant="h6" sx={{ fontWeight: 700 }}>
-                  RS {finalTotal}
-                </Typography>
-              </Box>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        mb: { xs: 2, sm: 2.5, md: 2.75, lg: 3 },
+                      }}
+                    >
+                      <Typography
+                        variant="h6"
+                        sx={{
+                          fontWeight: 700,
+                          fontSize: {
+                            xs: "1rem",
+                            sm: "1.15rem",
+                            md: "1.2rem",
+                            lg: "1.25rem",
+                          },
+                        }}
+                      >
+                        Total
+                      </Typography>
+                      <Typography
+                        variant="h6"
+                        sx={{
+                          fontWeight: 700,
+                          fontSize: {
+                            xs: "1rem",
+                            sm: "1.15rem",
+                            md: "1.2rem",
+                            lg: "1.25rem",
+                          },
+                        }}
+                      >
+                        RS {finalTotal}
+                      </Typography>
+                    </Box>
 
                     <Button
                       type="submit"
@@ -743,10 +1208,15 @@ const Checkout = () => {
                         textTransform: "none",
                         bgcolor: "rgba(0,0,0,0.8)",
                         color: "white",
-                        py: 1.5,
-                        fontSize: "1rem",
+                        py: { xs: 1, sm: 1.15, md: 1.3, lg: 1.5 },
+                        fontSize: {
+                          xs: "0.85rem",
+                          sm: "0.95rem",
+                          md: "0.98rem",
+                          lg: "1rem",
+                        },
                         fontWeight: 600,
-                        borderRadius: 2,
+                        borderRadius: { xs: 1.5, sm: 1.75, md: 1.85, lg: 2 },
                         "&:hover": {
                           bgcolor: "rgba(0,0,0,1)",
                         },
@@ -768,7 +1238,19 @@ const Checkout = () => {
         onClose={handleCloseSnackbar}
         anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
       >
-        <Alert onClose={handleCloseSnackbar} severity="success" sx={{ width: "100%" }}>
+        <Alert
+          onClose={handleCloseSnackbar}
+          severity="success"
+          sx={{
+            width: "100%",
+            fontSize: {
+              xs: "0.8rem",
+              sm: "0.875rem",
+              md: "0.95rem",
+              lg: "1rem",
+            },
+          }}
+        >
           Order placed successfully!
         </Alert>
       </Snackbar>
@@ -777,4 +1259,3 @@ const Checkout = () => {
 };
 
 export default Checkout;
-
