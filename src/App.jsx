@@ -24,11 +24,11 @@ function App() {
           <Route path="shipping-policy" element={<ShippingPolicy />} />
           <Route path="return-policy" element={<ReturnPolicy />} />
           <Route path="checkout" element={<Checkout />} />
-        </Route>
 
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/contact" element={<ContactUs />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/contact" element={<ContactUs />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   );
