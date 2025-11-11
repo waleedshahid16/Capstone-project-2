@@ -890,7 +890,7 @@ const Checkout = () => {
                   elevation={8}
                   sx={{
                     borderRadius: { xs: 1.5, sm: 2, md: 2.5, lg: 3 },
-                    backgroundColor: "rgba(0,0,0,0.5)",
+                    backgroundColor: "rgba(255,255,255,0.5)",
                     backdropFilter: "blur(10px)",
                     position: { md: "sticky" },
                     top: 20,
@@ -946,7 +946,7 @@ const Checkout = () => {
                                 md: 1.85,
                                 lg: 2,
                               },
-                              backgroundColor: "rgba(0,0,0,0.5)",
+                              backgroundColor: "rgba(0,0,0,0.02)",
                               border: "1px solid rgba(0,0,0,0.1)",
                               height: "100%",
                               position: "relative",
