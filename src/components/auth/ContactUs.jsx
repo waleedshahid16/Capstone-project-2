@@ -325,7 +325,8 @@ const ContactUs = () => {
                       {...field}
                       fullWidth
                       multiline
-                      rows={{ xs: 4, sm: 5, md: 6 }}
+                      minRows={4}
+                      maxRows={8}
                       placeholder="Tell us more about your inquiry..."
                       error={!!errors?.message}
                       sx={{
