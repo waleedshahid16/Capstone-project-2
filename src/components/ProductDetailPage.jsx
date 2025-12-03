@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useMemo, useCallback } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -21,7 +21,38 @@ const ProductDetailPage = () => {
   const [openSnackbar, setOpenSnackbar] = useState(false);
 
   const { products } = useSelector((state) => state.cart);
-  const product = products.find((p) => p.id === parseInt(id));
+  const product = useMemo(() => products.find((p) => p.id === parseInt(id)), [products, id]);
+
+  // Related products (same category) - memoized
+  const relatedProducts = useMemo(() => {
+    if (!product) return [];
+    return products
+      .filter((p) => p.category === product.category && p.id !== product.id)
+      .slice(0, 3);
+  }, [products, product]);
+
+  const handleAddToCart = useCallback(() => {
+    dispatch(addToCart(product));
+    setOpenSnackbar(true);
+  }, [dispatch, product]);
+
+  const handleCloseSnackbar = useCallback(() => {
+    setOpenSnackbar(false);
+  }, []);
+
+  const handleBack = useCallback(() => {
+    navigate(-1);
+  }, [navigate]);
+
+  const handleRelatedProductClick = useCallback((productId) => {
+    navigate(`/product/${productId}`);
+  }, [navigate]);
+
+  const handleAddRelatedToCart = useCallback((e, relatedProduct) => {
+    e.stopPropagation();
+    dispatch(addToCart(relatedProduct));
+    setOpenSnackbar(true);
+  }, [dispatch]);
 
   if (!product) {
     return (
@@ -44,16 +75,6 @@ const ProductDetailPage = () => {
     );
   }
 
-  // Related products (same category)
-  const relatedProducts = products
-    .filter((p) => p.category === product.category && p.id !== product.id)
-    .slice(0, 3);
-
-  const handleAddToCart = () => {
-    dispatch(addToCart(product));
-    setOpenSnackbar(true);
-  };
-
   return (
     <Box
       sx={{
@@ -65,7 +86,7 @@ const ProductDetailPage = () => {
       {/* Back Button */}
       <Button
         startIcon={<ArrowBackIcon sx={{ fontSize: { xs: 18, sm: 20 } }} />}
-        onClick={() => navigate(-1)}
+        onClick={handleBack}
         sx={{
           mb: { xs: 2, sm: 3 },
           color: "rgba(0,0,0,0.7)",
@@ -287,7 +308,7 @@ const ProductDetailPage = () => {
                       boxShadow: 3,
                     },
                   }}
-                  onClick={() => navigate(`/product/${relatedProduct.id}`)}
+                  onClick={() => handleRelatedProductClick(relatedProduct.id)}
                 >
                   <Box
                     component="img"
@@ -342,11 +363,7 @@ const ProductDetailPage = () => {
                     </Typography>
                     <Button
                       size="small"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        dispatch(addToCart(relatedProduct));
-                        setOpenSnackbar(true);
-                      }}
+                      onClick={(e) => handleAddRelatedToCart(e, relatedProduct)}
                       sx={{
                         minWidth: "auto",
                         p: { xs: 0.75, sm: 1 },
@@ -369,7 +386,7 @@ const ProductDetailPage = () => {
       <Snackbar
         open={openSnackbar}
         autoHideDuration={3000}
-        onClose={() => setOpenSnackbar(false)}
+        onClose={handleCloseSnackbar}
         message="Item added to cart!"
         anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
       />
@@ -377,4 +394,4 @@ const ProductDetailPage = () => {
   );
 };
 
-export default ProductDetailPage;
+export default React.memo(ProductDetailPage);

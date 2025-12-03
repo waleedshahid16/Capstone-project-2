@@ -14,17 +14,35 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart, removeFromCart, deleteFromCart } from "../store/slices/cartSlice";
 
-export default function Cart({ open, onClose }) {
+function Cart({ open, onClose }) {
   const { cartList } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
-  
-  const totalPrice = cartList
-    .reduce((prev, curr) => {
-      return (curr.quantity || 0) * (curr.price || 0) + prev;
-    }, 0)
-    .toFixed(2);
 
-  const totalItems = cartList.reduce((total, item) => total + (item.quantity || 0), 0);
+  const totalPrice = React.useMemo(() =>
+    cartList
+      .reduce((prev, curr) => {
+        return (curr.quantity || 0) * (curr.price || 0) + prev;
+      }, 0)
+      .toFixed(2),
+    [cartList]
+  );
+
+  const totalItems = React.useMemo(() =>
+    cartList.reduce((total, item) => total + (item.quantity || 0), 0),
+    [cartList]
+  );
+
+  const handleDeleteFromCart = React.useCallback((product) => {
+    dispatch(deleteFromCart(product));
+  }, [dispatch]);
+
+  const handleRemoveFromCart = React.useCallback((product) => {
+    dispatch(removeFromCart(product));
+  }, [dispatch]);
+
+  const handleAddToCart = React.useCallback((product) => {
+    dispatch(addToCart(product));
+  }, [dispatch]);
 
   return (
     <Drawer anchor="right" open={open} onClose={onClose}>
@@ -164,7 +182,7 @@ export default function Cart({ open, onClose }) {
                         
                         {/* Delete Button - Top Right */}
                         <IconButton
-                          onClick={() => dispatch(deleteFromCart(product))}
+                          onClick={() => handleDeleteFromCart(product)}
                           sx={{
                             position: "absolute",
                             top: { xs: -10, sm: -8 },
@@ -221,7 +239,7 @@ export default function Cart({ open, onClose }) {
                             }}
                           >
                             <Button
-                              onClick={() => dispatch(removeFromCart(product))}
+                              onClick={() => handleRemoveFromCart(product)}
                               sx={{
                                 "&:hover": {
                                   backgroundColor: "rgba(0, 0, 0, 0.04)",
@@ -241,7 +259,7 @@ export default function Cart({ open, onClose }) {
                               {product.quantity}
                             </Button>
                             <Button
-                              onClick={() => dispatch(addToCart(product))}
+                              onClick={() => handleAddToCart(product)}
                               sx={{
                                 "&:hover": {
                                   backgroundColor: "rgba(0, 0, 0, 0.04)",
@@ -412,3 +430,5 @@ export default function Cart({ open, onClose }) {
     </Drawer>
   );
 }
+
+export default React.memo(Cart);

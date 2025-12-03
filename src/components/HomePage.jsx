@@ -1,12 +1,12 @@
 // src/components/HomePage.jsx
-import React, { useState } from "react";
+import React, { useState, useMemo, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import { useNavigate } from "react-router-dom";
 import { addToCart } from "../store/slices/cartSlice";
 import { Snackbar } from "@mui/material";
 
-export default function HomePage() {
+function HomePage() {
   const { products: productsDummyData } = useSelector((s) => s.cart);
   const { searchTerm, filterCategory } = useSelector((s) => s.search);
   const navigate = useNavigate();
@@ -16,17 +16,37 @@ export default function HomePage() {
   const [expandedProducts, setExpandedProducts] = useState({});
   const maxLength = 80;
 
-  const filteredProducts = productsDummyData.filter((p) => {
-    const matchSearch = searchTerm
-      ? p.name.toLowerCase().includes(searchTerm.toLowerCase())
-      : true;
-    const matchFilter =
-      filterCategory === "all" || p.category === filterCategory;
-    return matchSearch && matchFilter;
-  });
+  const filteredProducts = useMemo(() => {
+    return productsDummyData.filter((p) => {
+      const matchSearch = searchTerm
+        ? p.name.toLowerCase().includes(searchTerm.toLowerCase())
+        : true;
+      const matchFilter =
+        filterCategory === "all" || p.category === filterCategory;
+      return matchSearch && matchFilter;
+    });
+  }, [productsDummyData, searchTerm, filterCategory]);
 
-  const toggleReadMore = (id) =>
+  const toggleReadMore = useCallback((id) => {
     setExpandedProducts((prev) => ({ ...prev, [id]: !prev[id] }));
+  }, []);
+
+  const handleAddToCart = useCallback((product) => {
+    dispatch(addToCart(product));
+    setOpenSnackbar(true);
+  }, [dispatch]);
+
+  const handleProductClick = useCallback((id) => {
+    navigate(`/product/${id}`);
+  }, [navigate]);
+
+  const handleViewMore = useCallback(() => {
+    navigate("/products");
+  }, [navigate]);
+
+  const handleCloseSnackbar = useCallback(() => {
+    setOpenSnackbar(false);
+  }, []);
 
   return (
     <div
@@ -58,7 +78,7 @@ export default function HomePage() {
               <img
                 src={product.image}
                 alt={product.name}
-                onClick={() => navigate(`/product/${product.id}`)}
+                onClick={() => handleProductClick(product.id)}
                 className="w-full h-[200px] object-contain mb-3 cursor-pointer transition-transform hover:scale-105"
               />
 
@@ -86,14 +106,7 @@ export default function HomePage() {
                 </span>
 
                 <button
-                  onClick={() => {
-                    dispatch(
-                      addToCart(
-                        productsDummyData.find((p) => p.id === product.id)
-                      )
-                    );
-                    setOpenSnackbar(true);
-                  }}
+                  onClick={() => handleAddToCart(product)}
                   className="inline-flex items-center rounded-full border border-black px-4 py-2 text-sm font-semibold text-black transition-all hover:bg-black hover:text-white"
                 >
                   <AddShoppingCartIcon className="mr-2" fontSize="small" />
@@ -108,14 +121,14 @@ export default function HomePage() {
       <Snackbar
         open={openSnackbar}
         autoHideDuration={3000}
-        onClose={() => setOpenSnackbar(false)}
+        onClose={handleCloseSnackbar}
         message="Item added to cart!"
         anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
       />
 
       <div className="flex justify-center mt-8">
         <button
-          onClick={() => navigate("/products")}
+          onClick={handleViewMore}
           className="text-white bg-black/70 hover:bg-black px-7 md:px-8 py-2.5 rounded-md font-semibold transition-colors"
         >
           View More Products
@@ -124,3 +137,5 @@ export default function HomePage() {
     </div>
   );
 }
+
+export default React.memo(HomePage);

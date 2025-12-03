@@ -1,13 +1,14 @@
 // src/components/Products.jsx
-import React, { useState } from "react";
+import React, { useState, useMemo, useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import { useNavigate } from "react-router-dom";
 import { addToCart } from "../store/slices/cartSlice";
 import { Snackbar } from "@mui/material";
 import { searchItem, setFilterCategory } from "../store/slices/searchSlice";
+import { useDebounce } from "../hooks/useDebounce";
 
-export default function Products() {
+function Products() {
   const { products: productsDummyData } = useSelector((s) => s.cart);
   const { searchTerm, filterCategory } = useSelector((s) => s.search);
   const dispatch = useDispatch();
@@ -15,16 +16,48 @@ export default function Products() {
 
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [expandedProducts, setExpandedProducts] = useState({});
+  const [searchInput, setSearchInput] = useState("");
   const maxLength = 80;
 
-  const filteredProducts = productsDummyData.filter((p) => {
-    const matchSearch = searchTerm ? p.name.toLowerCase().includes(searchTerm.toLowerCase()) : true;
-    const matchFilter = filterCategory === "all" || p.category === filterCategory;
-    return matchSearch && matchFilter;
-  });
+  const debouncedSearchTerm = useDebounce(searchInput, 300);
 
-  const toggleReadMore = (id) =>
+  // Dispatch search only when debounced value changes
+  useEffect(() => {
+    dispatch(searchItem(debouncedSearchTerm));
+  }, [debouncedSearchTerm, dispatch]);
+
+  const filteredProducts = useMemo(() => {
+    return productsDummyData.filter((p) => {
+      const matchSearch = searchTerm ? p.name.toLowerCase().includes(searchTerm.toLowerCase()) : true;
+      const matchFilter = filterCategory === "all" || p.category === filterCategory;
+      return matchSearch && matchFilter;
+    });
+  }, [productsDummyData, searchTerm, filterCategory]);
+
+  const toggleReadMore = useCallback((id) => {
     setExpandedProducts((prev) => ({ ...prev, [id]: !prev[id] }));
+  }, []);
+
+  const handleSearchChange = useCallback((e) => {
+    setSearchInput(e.target.value);
+  }, []);
+
+  const handleFilterChange = useCallback((e) => {
+    dispatch(setFilterCategory(e.target.value));
+  }, [dispatch]);
+
+  const handleAddToCart = useCallback((product) => {
+    dispatch(addToCart(product));
+    setOpenSnackbar(true);
+  }, [dispatch]);
+
+  const handleProductClick = useCallback((id) => {
+    navigate(`/product/${id}`);
+  }, [navigate]);
+
+  const handleCloseSnackbar = useCallback(() => {
+    setOpenSnackbar(false);
+  }, []);
 
   return (
     <div id="products-section" className="w-full px-4 sm:px-6 lg:px-24 xl:px-48 py-6">
@@ -37,11 +70,11 @@ export default function Products() {
         <input
           type="text"
           placeholder="Search products..."
-          onChange={(e) => dispatch(searchItem(e.target.value))}
+          onChange={handleSearchChange}
           className="w-full md:flex-1 rounded-md border border-black/20 bg-black/5 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-black/40"
         />
         <select
-          onChange={(e) => dispatch(setFilterCategory(e.target.value))}
+          onChange={handleFilterChange}
           className="min-w-[180px] rounded-md bg-black/70 text-white px-3 py-2 focus:outline-none"
           defaultValue={filterCategory}
         >
@@ -65,7 +98,7 @@ export default function Products() {
               <img
                 src={product.image}
                 alt={product.name}
-                onClick={() => navigate(`/product/${product.id}`)}
+                onClick={() => handleProductClick(product.id)}
                 className="w-full h-[200px] object-contain mb-3 cursor-pointer transition-transform hover:scale-105"
               />
 
@@ -88,10 +121,7 @@ export default function Products() {
               <div className="mt-auto flex items-center justify-between gap-2">
                 <span className="font-bold text-lg text-black/90">RS {product.price}</span>
                 <button
-                  onClick={() => {
-                    dispatch(addToCart(productsDummyData.find((p) => p.id === product.id)));
-                    setOpenSnackbar(true);
-                  }}
+                  onClick={() => handleAddToCart(product)}
                   className="inline-flex items-center rounded-full border border-black px-4 py-2 text-sm font-semibold text-black transition-all hover:bg-black hover:text-white"
                 >
                   <AddShoppingCartIcon className="mr-2" fontSize="small" />
@@ -106,10 +136,12 @@ export default function Products() {
       <Snackbar
         open={openSnackbar}
         autoHideDuration={3000}
-        onClose={() => setOpenSnackbar(false)}
+        onClose={handleCloseSnackbar}
         message="Item added to cart!"
         anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
       />
     </div>
   );
 }
+
+export default React.memo(Products);

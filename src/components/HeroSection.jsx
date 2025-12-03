@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import {
   Box,
   TextField,
@@ -12,19 +12,36 @@ import FilterListIcon from "@mui/icons-material/FilterList";
 import BgImg from "../assets/BgImg.webp";
 import { useDispatch } from "react-redux";
 import { searchItem, setFilterCategory } from "../store/slices/searchSlice";
+import { useDebounce } from "../hooks/useDebounce";
 
 const HeroSection = () => {
   const dispatch = useDispatch();
   const [filterCategory, setLocalFilterCategory] = useState("all");
+  const [searchInput, setSearchInput] = useState("");
+  const debouncedSearchTerm = useDebounce(searchInput, 300);
 
-  const handleSearchClick = () => {
+  // Dispatch search only when debounced value changes
+  useEffect(() => {
+    dispatch(searchItem(debouncedSearchTerm));
+  }, [debouncedSearchTerm, dispatch]);
+
+  const handleSearchClick = useCallback(() => {
     setTimeout(() => {
       const productsSection = document.getElementById("products-section");
       if (productsSection) {
         productsSection.scrollIntoView({ behavior: "smooth", block: "start" });
       }
     }, 500);
-  };
+  }, []);
+
+  const handleFilterChange = useCallback((e) => {
+    setLocalFilterCategory(e.target.value);
+    dispatch(setFilterCategory(e.target.value));
+  }, [dispatch]);
+
+  const handleSearchChange = useCallback((e) => {
+    setSearchInput(e.target.value);
+  }, []);
 
   return (
     <Box
@@ -135,10 +152,7 @@ const HeroSection = () => {
             {/* Filter Dropdown */}
             <Select
               value={filterCategory}
-              onChange={(e) => {
-                setLocalFilterCategory(e.target.value);
-                dispatch(setFilterCategory(e.target.value));
-              }}
+              onChange={handleFilterChange}
               displayEmpty
               startAdornment={
                 <FilterListIcon sx={{ 
@@ -192,7 +206,7 @@ const HeroSection = () => {
               fullWidth
               placeholder="Search your products from here"
               variant="outlined"
-              onChange={(e) => dispatch(searchItem(e.target.value))}
+              onChange={handleSearchChange}
               sx={{
                 "& fieldset": { border: "none" },
                 backgroundColor: "rgba(0,0,0,0.02)",
@@ -281,4 +295,4 @@ const HeroSection = () => {
   );
 };
 
-export default HeroSection;
+export default React.memo(HeroSection);

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useMemo, useCallback } from "react";
 import {
   Box,
   Container,
@@ -61,21 +61,28 @@ const Checkout = () => {
     resolver: yupResolver(checkoutSchema),
   });
 
-  const totalPrice = cartList
-    .reduce((prev, curr) => {
-      return (curr.quantity || 0) * (curr.price || 0) + prev;
-    }, 0)
-    .toFixed(2);
-
-  const totalItems = cartList.reduce(
-    (total, item) => total + (item.quantity || 0),
-    0
+  // Memoize calculations
+  const totalPrice = useMemo(() =>
+    cartList
+      .reduce((prev, curr) => {
+        return (curr.quantity || 0) * (curr.price || 0) + prev;
+      }, 0)
+      .toFixed(2),
+    [cartList]
   );
 
-  const shippingFee = totalPrice > 5000 ? 0 : 500;
-  const finalTotal = (parseFloat(totalPrice) + shippingFee).toFixed(2);
+  const totalItems = useMemo(() =>
+    cartList.reduce(
+      (total, item) => total + (item.quantity || 0),
+      0
+    ),
+    [cartList]
+  );
 
-  const handleCheckout = (data) => {
+  const shippingFee = useMemo(() => totalPrice > 5000 ? 0 : 500, [totalPrice]);
+  const finalTotal = useMemo(() => (parseFloat(totalPrice) + shippingFee).toFixed(2), [totalPrice, shippingFee]);
+
+  const handleCheckout = useCallback((data) => {
     console.log("Checkout data:", data);
     console.log("Cart items:", cartList);
     cartList.forEach((item) => {
@@ -88,11 +95,15 @@ const Checkout = () => {
     setTimeout(() => {
       navigate("/");
     }, 3000);
-  };
+  }, [cartList, dispatch, navigate]);
 
-  const handleCloseSnackbar = () => {
+  const handleCloseSnackbar = useCallback(() => {
     setOpenSnackbar(false);
-  };
+  }, []);
+
+  const handleRemoveItem = useCallback((item) => {
+    dispatch(deleteFromCart(item));
+  }, [dispatch]);
 
   if (cartList.length === 0 && !orderPlaced) {
     return (
@@ -954,7 +965,7 @@ const Checkout = () => {
                           >
                             {/* Delete Button */}
                             <IconButton
-                              onClick={() => dispatch(deleteFromCart(item))}
+                              onClick={() => handleRemoveItem(item)}
                               sx={{
                                 position: "absolute",
                                 top: { xs: 3, sm: 4, md: 5, lg: 6 },
